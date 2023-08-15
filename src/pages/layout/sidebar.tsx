@@ -28,30 +28,23 @@ const getItem = (
   } as AntdMenuItem)
 
 const renderMenu = (item: MenuItem, path: string): AntdMenuItem => {
-  if (item.isShowOnMenu === false) {
-    return null
-  }
   if (!item.children) {
     return getItem(
       <Link to={path + item.path}>{item.title}</Link>,
       item.key,
-      <SvgIcon name={item.menu.icon} myClass="font-12" />
+      <SvgIcon name={item.icon} myClass="font-12" />
     )
   }
   return getItem(
     item.title,
     item.key,
-    <SvgIcon name={item.menu.icon} myClass="font-12" />,
+    <SvgIcon name={item.icon} myClass="font-12" />,
     item.children.map((i) => renderMenu(i, path + item.path))
   )
 }
 
 const FlexBox = ({ children }: { children: JSX.Element }) => {
-  return (
-    <Col sm={6} md={10} lg={15} className="fl">
-      {children}
-    </Col>
-  )
+  return <div className="layout-sidebar-menu">{children}</div>
 }
 const SliderContent = ({ children }: { children: JSX.Element }) => {
   const [collapsed, setCollapsed] = useState(false)
@@ -75,12 +68,16 @@ const SliderContent = ({ children }: { children: JSX.Element }) => {
   )
 }
 
-const SiderMenu = () => {
+const SidebarMenu = () => {
   const layout = layoutTypes.SINGLE_COLUMN // 状态
   const menuList = useSelector((state: State) => state.menu.menuList) // 菜单列表
-  // 菜单组折叠
-  function onOpenChange() {
-    // dispatch(setOpenKey(keys))
+  // const openKeys = menuList.map(e => e.key)
+  const [openKeys, setOpenKeys] = useState<string[]>([]) // 当前展开的 SubMenu 菜单项 key 数组
+  console.log(openKeys)
+  console.log('菜单列表', menuList)
+  // 打开父菜单
+  function onOpenChange(keys: string[]) {
+    setOpenKeys(keys.length ? [keys[keys.length - 1]] : [])
   }
 
   // 菜单选项
@@ -102,19 +99,13 @@ const SiderMenu = () => {
     return ' col'
   }, [layout])
 
-  const mode = useMemo(() => {
-    if (layout === layoutTypes.SINGLE_COLUMN) {
-      return 'horizontal'
-    }
-    return 'inline'
-  }, [layout])
-
   return (
     <WrapContainer>
       <Menu
-        mode={mode}
+        mode="inline"
         triggerSubMenuAction="click"
         className={clsName}
+        openKeys={openKeys}
         onOpenChange={onOpenChange}
         items={menuComponent}
       />
@@ -122,4 +113,4 @@ const SiderMenu = () => {
   )
 }
 
-export default SiderMenu
+export default SidebarMenu

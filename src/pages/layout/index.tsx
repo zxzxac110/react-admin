@@ -1,7 +1,9 @@
 import { Layout } from 'antd'
 import { Outlet } from 'react-router-dom'
-import Sidebar from './sidebar'
 import SvgIcon from '@/components/svgIcon'
+import Logo from './logo'
+import Sidebar from './sidebar'
+import Header from './header/index'
 
 // import Header from "./header";
 // import Menu from "./siderMenu";
@@ -49,9 +51,15 @@ import './index.less'
 const LayoutContainer = () => {
   // const { styles } = useStyle();
   return (
-    <div className="theme">
-      <SvgIcon name="user" myClass="font-20 green--text"></SvgIcon>
-      <Sidebar></Sidebar>
+    <div className="theme d-flex">
+      <div className="layout-sidebar">
+        <Logo></Logo>
+        <Sidebar></Sidebar>
+      </div>
+      <div className="flex1">
+        <Header></Header>
+        <Outlet></Outlet>
+      </div>
     </div>
   )
 }

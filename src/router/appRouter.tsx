@@ -1,4 +1,4 @@
-// 展示 等待页 || 登录页 || 正式路由页面
+// 展示  等待页 || 登录页 || 正式路由页面
 import { useEffect, useState } from 'react'
 import { BrowserRouter, HashRouter, Routes, Route, useRoutes } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
@@ -14,7 +14,7 @@ function AppRouter() {
   const [loading, setLoad] = useState(true)
   const userInfo = useSelector((state: State) => state.user)
   const dispatch = useDispatch()
-  console.log('开始', loading, userInfo)
+
   useEffect(() => {
     // 副作用参数 只有当参数二发送改变才会执行参数1
     console.log('执行useEffect', userInfo)
@@ -26,14 +26,14 @@ function AppRouter() {
     }
     setLoad(false)
   }, [userInfo, dispatch])
-  console.log('结束', loading, userInfo)
+
   if (loading)
     return (
       <Spin size="large" tip="Loading...">
         <div className="app" />
       </Spin>
     )
-  console.log(!userInfo, 11111111)
+
   if (!userInfo) return <Login />
 
   return (

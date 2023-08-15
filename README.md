@@ -134,3 +134,7 @@ export const route = {
 ####
 
 npm install @loadable/component -D 动态加载
+
+keepAlive
+: 
+"true"

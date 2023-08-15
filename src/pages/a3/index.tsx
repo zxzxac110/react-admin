@@ -1,5 +1,5 @@
 function A3() {
-  return <div>A3</div>
+  return <div>全屏页面</div>
 }
 
 export default A3

@@ -2,41 +2,42 @@
 import { Navigate } from 'react-router-dom'
 import loadable from '@loadable/component'
 import Error from '@/pages/error'
+import Login from '@/pages/login'
 import { Spin } from 'antd'
 
 type LoadingComponent = () => Promise<React.ReactNode>
 
 export interface RouterInfo {
-  components: LoadingComponent | React.ReactNode // 页面 
-  path: string  // 访问路径  使用路径进行比较
+  components: LoadingComponent | React.ReactNode // 页面
+  path: string // 访问路径  使用路径进行比较
   key?: any // 确认唯一值
   title?: string | any // 标题
+  full?: boolean // 是否全屏
   keepAlive?: string | any
   [name: string]: any
 }
 
+const fellbackStyle = {
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+  fontSize: 24,
+}
+
 // 常用路由 不需要权限的路由
 const constRouter: RouterInfo[] = [
-  // 常用路由
   {
-    path: '/',
-    key: '',
-    components: <Navigate to="/a3" replace />,
+    path: '/login',
+    key: 'login',
+    full: true,
+    components: <Login />,
   },
   {
-    path: '/result/404',
-    components: <Error />,
-  },
-  {
-    path: '/result/403',
+    path: '/a3',
+    key: 'a3',
+    full: true,
     components: (
       <Error status="403" errTitle="403" subTitle="Sorry, you don't have access to this page." />
-    ),
-  },
-  {
-    path: '/result/500',
-    components: (
-      <Error status="500" errTitle="500" subTitle="Sorry, the server is reporting an error." />
     ),
   },
   {
@@ -51,20 +52,14 @@ const constRouter: RouterInfo[] = [
 const asyncRouter: RouterInfo[] = []
 
 // 异步路由处理前格式
-const auto = [ 
+const auto = [
   {
+    // 菜单
     path: '/power/user',
     key: 'powerUser',
     components: () => import('@/pages/a2'),
   },
 ]
-
-const fellbackStyle = {
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'center',
-  fontSize: 24,
-}
 
 auto.forEach((item) => {
   const { ...anyProps } = item
@@ -75,6 +70,4 @@ auto.forEach((item) => {
   asyncRouter.push(info)
 })
 
-const localRouter: RouterInfo[] = [...asyncRouter, ...constRouter]
-
-export default localRouter
+export default { asyncRouter, constRouter }

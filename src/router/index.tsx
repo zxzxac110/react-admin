@@ -1,61 +1,79 @@
-import { useEffect, useMemo, useState } from 'react'
-import { Routes, Route } from 'react-router-dom'
+// 获取菜单 生成路由
+import { useEffect, useState } from 'react'
+import { Routes, Route, Navigate } from 'react-router-dom'
 import localRouter, { RouterInfo } from './list'
 import Intercept from './intercept'
-import { getMenus, formatMenu, reduceMenuList } from '@/utils'
+import { getMenus, formatMenu } from '@/utils'
 import { useDispatchMenu } from '@/store/hooks'
+import Layout from '@/pages/layout'
 
 const Router = () => {
   console.log('RouterRouterRouterRouterRouterRouterRouterRouter')
   const { stateSetMenuList } = useDispatchMenu() // 设置右侧菜单
-  const [mergeRouterList, setMergeList] = useState<RouterInfo[]>([]) // 最终路由
-  const [ajaxUserMenuList, setAjaxUserMenuList] = useState<MenuList>([]) // 网络请求回来的 路由列表
+  const [mergeRouterList, setMergeList] = useState<React.ReactElement[]>([]) // 即将生成的路由列表
 
   // 监听 菜单变化  路由跟着变化
   useEffect(() => {
     if (stateSetMenuList && typeof stateSetMenuList === 'function') {
       getMenus().then((list) => {
-        const formatList = formatMenu(list)
-        console.log('formatList', formatList)
-        const userMenus = reduceMenuList(formatList)
-        console.log('userMenus', userMenus)
-        // 把请求的数据 和 本地pages页面暴露出的路由列表合并
-        const routers = localRouter.map((router) => {
-          const find = userMenus.find((i) => (i.parentPath || '') + i.path === router.path)
-          if (find) {
-            router = { ...find, ...router } // 本地 优先 接口结果
-          } else {
-            router.key = router.path
-          }
-          return router
-        })
         if (list && list.length) {
+          const formatList = formatMenu(list)
+          console.log('formatList右侧菜单列表', formatList)
+          // 生成路由
+          const routers = genRouter(list)
           stateSetMenuList(formatList)
-          setAjaxUserMenuList(userMenus)
           setMergeList(routers)
-          console.log('最终路由', routers)
+          console.log('即将生成的路由列表', routers)
         }
       })
     }
   }, [stateSetMenuList])
 
-  const routerBody = useMemo(() => {
-    // 监听 本地路由列表   同时存在长度大于1时 渲染路由组件
+  // 生成路由
+  const genRouter = (mergeRouterList: any[]): React.ReactElement[] => {
     if (mergeRouterList.length) {
-      return mergeRouterList.map((item) => {
-        const { key, path } = item
-        return (
-          <Route
-            key={key}
-            path={path}
-            element={<Intercept {...item} menuList={ajaxUserMenuList} pageKey={key} />}
-          />
-        )
+      const arr: Record<string, any[]> = {
+        full: [],
+        noFull: [],
+      }
+      let redirect = '' // 重定向，取匹配成功的第一个
+      const menuMap: Record<string, RouterInfo> = {} // 后端菜单map
+      const matchRouter: RouterInfo[] = [...localRouter.constRouter] // 常用 + 匹配成功的异步路由
+      mergeRouterList.forEach((e) => {
+        menuMap[e.key] = {
+          ...e,
+          parentPath: '/' + e.parentKey,
+        }
       })
-    }
-  }, [ajaxUserMenuList, mergeRouterList])
+      localRouter.asyncRouter.forEach((e: RouterInfo) => {
+        if (menuMap[e.key]) {
+          redirect = redirect || e.path
+          matchRouter.push({ ...menuMap[e.key], ...e }) // 添加菜单的属性和本地路由的属性
+        }
+      })
 
-  return <Routes>{routerBody}</Routes>
+      matchRouter.forEach((e) => {
+        const { key, path } = e
+        const com = <Route key={key} path={path} element={<Intercept {...e} pageKey={key} />} />
+        if (e.full) {
+          arr.full.push(com)
+        } else {
+          arr.noFull.push(com)
+        }
+      })
+
+      return [
+        <Route key="index" path={'/'} element={<Navigate to={redirect} />} />,
+        <Route key="/" element={<Layout />}>
+          {...arr.noFull}
+        </Route>,
+        ...arr.full,
+      ]
+    }
+    return []
+  }
+
+  return <Routes>{mergeRouterList}</Routes>
 }
 
 export default Router

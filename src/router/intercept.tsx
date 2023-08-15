@@ -1,3 +1,4 @@
+// 路由拦截
 import { useCallback, useEffect, useMemo, useState } from 'react'
 import { getMenuParentKey } from '@/utils'
 import Error from '@/pages/error'
@@ -15,14 +16,13 @@ interface Props {
   path?: string
   title?: string
   pageKey: string
-  menuList: Array<MenuItem>
   [key: string]: any
 }
 
 // 路由拦截
 // 菜单 组件 标题 路径 key
-function Intercept({ menuList, components, title, path: pagePath, pageKey }: Props) {
-  console.log('Intercept', pageKey, menuList, components, title, pagePath)
+function Intercept({ components, title, path: pagePath, pageKey }: Props) {
+  console.log('Intercept', pageKey, title, pagePath)
   const [pageInit, setPageInit] = useState(false)
   const location = useLocation()
   // const {  stateAddOpenedMenu, stateSetCurrentPath } = useDispatchMenu()
@@ -45,7 +45,6 @@ function Intercept({ menuList, components, title, path: pagePath, pageKey }: Pro
     }
     document.title = title
     // stateSetSelectMenuKey([String(pageKey)])
-    // let openkey = getMenuParentKey(menuList, pageKey)
     // stateAddOpenedMenu({ key: pageKey, path: currentPath, title })
   }, [title])
 
@@ -67,18 +66,6 @@ function Intercept({ menuList, components, title, path: pagePath, pageKey }: Pro
       onPathChange()
     }
   }, [onPathChange, pageInit])
-
-  const hasPath = !menuList.find((m) => (m.parentPath || '') + m.path === pagePath)
-
-  if (hasPath && pagePath !== '/' && pagePath !== '*') {
-    return (
-      <Error
-        status="403"
-        errTitle="权限不够"
-        subTitle="Sorry, you are not authorized to access this page."
-      />
-    )
-  }
 
   return components
 }

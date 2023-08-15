@@ -1,5 +1,5 @@
 function A1() {
-  return <div>A1</div>
+  return <div>详情页</div>
 }
 
 export default A1
