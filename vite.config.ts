@@ -2,10 +2,16 @@ import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import svgr from "vite-plugin-svgr";
 import path from 'path'
-// https://vitejs.dev/config/
+import { createSvgIconsPlugin } from 'vite-plugin-svg-icons';
+
 export default defineConfig(({ command, mode }) => {
   return {
-    plugins: [react(), svgr()],
+    plugins: [react(), svgr(), createSvgIconsPlugin({
+      // 指定要缓存的文件夹
+      iconDirs: [path.resolve(process.cwd(), 'src/svg')],
+      // 指定symbolId格式
+      symbolId: '[name]'
+    })],
     resolve: {
       alias: {
         '@': path.resolve(__dirname, 'src'),

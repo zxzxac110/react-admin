@@ -128,3 +128,9 @@ export const route = {
 普通打包模式。
 
 - npm run preview
+
+
+
+####
+
+npm install @loadable/component -D 动态加载

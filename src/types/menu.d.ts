@@ -29,11 +29,11 @@ declare interface MenuItem {
   key: string | number
   order?: number
   parentKey: string
-  path: string
+  path: string // 路径    MENU_PATH
   title: string
   children?: MenuList
   parentPath?: string
-  isShowOnMenu?: boolean | string
+  isShowOnMenu?: boolean | string // 显示菜单MENU_SHOW
   [key: string]: any
 }
 

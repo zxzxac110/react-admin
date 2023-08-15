@@ -1,54 +1,20 @@
+// 展示 等待页 || 登录页 || 正式路由页面
 import { useEffect, useState } from 'react'
 import { BrowserRouter, HashRouter, Routes, Route, useRoutes } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import { setUserInfoAction } from '@/store/action'
 import { getLocalUser } from '@/utils'
 import { Spin } from 'antd'
+import RouterList from './index'
 
-import Layout from '@/pages/a1'
-import Board from '@/pages/a2'
-import Article from '@/pages/a3'
-import NotFound from '@/pages/a4'
 import Login from '@/pages/login'
 
-// 路由数组
-const routesList = [
-  {
-    path: '/',
-    element: <Layout />,
-    children: [
-      {
-        element: <Board />,
-        index: true, // index设置为true 变成默认的二级路由
-      },
-      {
-        path: 'article',
-        element: <Article />,
-      },
-    ],
-  },
-  {
-    path: '/login',
-    element: <Login />,
-  },
-  // 增加n个路由对应关系
-  {
-    path: '*',
-    element: <NotFound />,
-  },
-]
-
-// 使用useRoutes方法传入routesList生成Routes组件
-function WrapperRoutes() {
-  const element = useRoutes(routesList)
-  return element
-}
-
 function AppRouter() {
-  console.log('appRouter')
+  console.log('appRouter---')
   const [loading, setLoad] = useState(true)
   const userInfo = useSelector((state: State) => state.user)
   const dispatch = useDispatch()
+  console.log('开始', loading, userInfo)
   useEffect(() => {
     // 副作用参数 只有当参数二发送改变才会执行参数1
     console.log('执行useEffect', userInfo)
@@ -60,19 +26,19 @@ function AppRouter() {
     }
     setLoad(false)
   }, [userInfo, dispatch])
-
+  console.log('结束', loading, userInfo)
   if (loading)
     return (
       <Spin size="large" tip="Loading...">
         <div className="app" />
       </Spin>
     )
-
+  console.log(!userInfo, 11111111)
   if (!userInfo) return <Login />
 
   return (
     <HashRouter>
-      <WrapperRoutes />
+      <RouterList />
     </HashRouter>
   )
 }

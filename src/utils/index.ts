@@ -1,3 +1,5 @@
+import { getMenu } from "@/api";
+
 export const USER_INFO = "USER_INFO"; // 用户信息
 export const TOKEN = "REACT_ADMIN_TOKEN"; // token
 export const MENU = "MENU"; // 菜单
@@ -59,8 +61,29 @@ export function clearLocalDatas(keys: string[]) {
     rmKey(false, key);
   });
 }
+
 /**
- * 菜单处理
+ * 获取菜单
+ */
+function getLocalMenu(): MenuResponse | null {
+  return getKey(false, MENU);
+}
+
+function saveLocalMenu(list: MenuResponse) {
+  setKey(false, MENU, list);
+}
+export async function getMenus() {
+  let localMenu = getLocalMenu();
+  console.log('获取菜单', localMenu, !!localMenu)
+  if (localMenu) { return localMenu }
+  console.log(666666666)
+  localMenu = await getMenu()
+  saveLocalMenu(localMenu);
+  return localMenu
+}
+
+/**
+ * 菜单格式化处理,将后台传递的一维数组改成树形结构
  * @param list 
  * @returns 
  */
@@ -105,4 +128,31 @@ export function formatMenu(list: MenuList) {
     }
   });
   return parentMenu;
+}
+
+export function reduceMenuList(list: MenuList, path: string = ''): MenuList {
+  const data: MenuList = [];
+  list.forEach((i) => {
+    const { children, ...item } = i;
+    item.parentPath = path;
+    if (children) {
+      const childList = reduceMenuList(children, path + i.path);
+      data.push(...childList);
+    }
+    data.push(item);
+  });
+  return data;
+}
+
+
+export function getMenuParentKey(list: MenuList, key: string): string[] {
+  const keys = [];
+  const info = list.find((item) => item[MENU_KEY] === key);
+  const parentKey = info?.[MENU_PARENTKEY];
+  if (parentKey) {
+    const data = getMenuParentKey(list, parentKey)
+    keys.push(...data);
+    keys.push(parentKey);
+  }
+  return keys;
 }
