@@ -1,5 +1,5 @@
 function Card() {
-  return <div>基础表单</div>
+  return <div>500</div>
 }
 
 export default Card

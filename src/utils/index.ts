@@ -61,6 +61,12 @@ export function clearLocalDatas(keys: string[]) {
     rmKey(false, key);
   });
 }
+/**
+ * 退出
+ */
+export function layout() {
+  clearLocalDatas([TOKEN, MENU]); // 不移除USER_INFO 因为登录页的账号取得是这里的
+}
 
 /**
  * 获取菜单

@@ -1,13 +1,17 @@
-
-const ActionTypes = {
-  SET_USERINFO: "SET_USERINFO",
-  CLEAR_USERINFO: "CLEAR_USERINFO",
-}
-export const setUserInfoAction = (info: UserInfo): UserAction => ({
-  type: ActionTypes.SET_USERINFO,
-  info,
+export const setUserInfoAction = (userInfo: UserInfo): UserAction => ({
+  type: 'setUserinfo',
+  userInfo,
 });
 
 export const clearUser = (): UserAction => ({
-  type: ActionTypes.CLEAR_USERINFO,
+  type: 'clearUserinfo',
+});
+
+export const setToken = (token: string): UserAction => ({
+  type: 'setToken',
+  token,
+});
+
+export const clearToken = (): UserAction => ({
+  type: 'clearToken',
 });

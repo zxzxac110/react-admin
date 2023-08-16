@@ -1,17 +1,24 @@
-import { getSessionUser } from "@/utils";
-const actionTypes = {
-  SET_USERINFO: "SET_USERINFO",
-  CLEAR_USERINFO: "CLEAR_USERINFO",
-}
-const initState: UserInfo = getSessionUser()
+import { getLocalUser, getToken } from "@/utils";
 
-export default function reducer(state = initState, action: UserAction) {
-  const { type, info } = action
+const userState: UserState = {
+  token: getToken(),
+  userInfo: getLocalUser(),
+};
+
+export default function reducer(state = userState, action: UserAction): UserState {
+  const { type, userInfo, token } = action
   switch (type) {
-    case actionTypes.SET_USERINFO:
-      return info
-    case actionTypes.CLEAR_USERINFO: {
-      return null
+    case 'setUserinfo': {
+      return { ...state, userInfo: userInfo || null };
+    }
+    case 'clearUserinfo': {
+      return { ...state, userInfo: null };
+    }
+    case 'setToken': {
+      return { ...state, token: token || '' };
+    }
+    case 'clearToken': {
+      return { ...state, token: '' };
     }
     default:
       return state

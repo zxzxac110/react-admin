@@ -9,11 +9,13 @@ declare type UserInfo = {
 
 declare type UserAction = {
   type: string
-  info?: UserInfo
+  userInfo?: UserInfo
+  token?: string
 }
 
 declare type UserState = {
-  user: UserInfo
+  userInfo: UserInfo | null
+  token: string | undefined | null
 }
 
 type Token = string | null | undefined
@@ -21,7 +23,7 @@ type Token = string | null | undefined
 // state类型
 declare interface State {
   menu: MenuState
-  user: UserInfo
+  user: UserState
   layout: LayoutMode[]
   componentsVisible: componentsVisible
   theme: StateTheme

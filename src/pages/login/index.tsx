@@ -1,10 +1,9 @@
 import { useState } from 'react'
 import { Form, Input, Button, message, Row } from 'antd'
-import { useSelector, useDispatch } from 'react-redux'
 import { ReactComponent as IconUser } from '@/svg/user.svg'
 import { ReactComponent as IconLocking } from '@/svg/locking.svg'
 import { saveUser, getLocalUser, saveToken } from '@/utils'
-import { setUserInfoAction } from '@/store/action'
+import { useDispatchUser } from '@/store/hooks/user'
 import { login } from '@/api'
 import './index.less'
 
@@ -22,18 +21,20 @@ const IPT_RULE_PASSWORD = [
   },
 ]
 function Login() {
-  const counter = useSelector((state) => state)
   const [loading, setLoading] = useState(false)
-  const dispatch = useDispatch()
+  const { stateSetUser, stateSetToken } = useDispatchUser()
   const onFinish = async (values: Record<string, string | boolean>) => {
     try {
       setLoading(true)
       const res = await login(values)
       const info = Object.assign({ isLogin: true }, res.data)
-      saveToken(res.token)
-      message.success(res.msg)
+      message.success(res.msg) 
+      saveToken(res.token) // TODO
+      stateSetToken(res.token)
       saveUser(info)
-      dispatch(setUserInfoAction(info))
+      stateSetUser(info)
+      // 没有路由跳转 可根据监听 || 刷新页面 || 强制跳转 到用户页面
+      // 监听： ./appRouter useEffect token进行登录页判断
     } finally {
       setLoading(false)
     }

@@ -1,13 +1,27 @@
-import { useMemo, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { Link, useNavigate } from 'react-router-dom'
-import { Layout, Menu, Button, Dropdown, MenuProps } from 'antd'
+import { useNavigate } from 'react-router-dom'
+import { Button, Dropdown, MenuProps } from 'antd'
 import SvgIcon from '@/components/svgIcon'
-import titleImage from '@/assets/images/title.svg' // 使用 @ 别名引入图片
+import userImage from '@/assets/images/user.png' // 使用 @ 别名引入图片
+import {
+  useDispatchUser,
+  useStateUserInfo,
+  useDispatchMenu,
+  useStateCollapsed,
+} from '@/store/hooks'
+import { layout } from '@/utils/index'
+
 import './index.less'
 
-function Header(props) {
+function Header() {
   const navigate = useNavigate()
+  const userInfo = useStateUserInfo()
+  const collapsed = useStateCollapsed()
+  const { stateClearToken } = useDispatchUser()
+  const { stateSetCollapsed } = useDispatchMenu()
+
+  function setCollapsed() {
+    stateSetCollapsed(!collapsed)
+  }
 
   const items: MenuProps['items'] = [
     {
@@ -15,8 +29,11 @@ function Header(props) {
       label: (
         <div
           onClick={() => {
-            // storage.clear()
-            navigate('/login', { replace: true })
+            stateClearToken()
+            layout()
+            // 此处不需要跳转 根据./appRouter useEffect token进行登录页判断
+            // navigate('/login', { replace: true })
+            // window.location.reload()
           }}>
           退出登录
         </div>
@@ -27,9 +44,9 @@ function Header(props) {
   return (
     <div className="d-flex header align-center ">
       <div className="line"></div>
-      <div className="hamburger-container">
+      <div className="hamburger-container " onClick={setCollapsed}>
         <svg
-          className="hamburger"
+          className={'hamburger ' + (collapsed ? 'rotate' : '')}
           viewBox="0 0 1024 1024"
           xmlns="http://www.w3.org/2000/svg"
           width="18"
@@ -39,32 +56,13 @@ function Header(props) {
       </div>
       <div className="flex1"></div>
       <Dropdown menu={{ items }} placement="bottom" arrow={{ pointAtCenter: true }}>
-        <Button>bottom</Button>
+        <Button type="text" className="mr-5 avatar-btn">
+          <img src={userInfo?.avatar || userImage} className="user-avatar mr-2" />
+          <span></span> {userInfo?.username}
+          <SvgIcon name="arrows-down" myClass="font-12 ml-2"></SvgIcon>
+        </Button>
       </Dropdown>
     </div>
-
-    // <CSSTransition>
-    //   <div className="header sidebar-logo-container">
-    //     <Link to="/" className="full d-flex align-center justify-center">
-    //       <SvgIcon name="logo" myClass="font-28"></SvgIcon>
-    //       <img src={titleImage} className="title-svg ml-2" alt="" />
-    //     </Link>
-    //     {/* // <router-link v-if="getCollapse" key="collapse" class="sidebar-logo-link" to="/">
-    //   //   <SvgIcon name="logo" myClass="font-28"></SvgIcon>
-    //   // </router-link>
-    //   // <router-link
-    //   //   v-else
-    //   //   key="expand"
-    //   //   class="sidebar-logo-link"
-    //   //   style="display: flex;justify-content: start;align-items: center;"
-    //   //   to="/"
-    //   // >
-    //   //   <SvgIcon name="logo" myClass="font-28"></SvgIcon>
-    //   //   <SvgIcon name="title" myClass="font-28"></SvgIcon>
-    //   //   <i className="bw-icon title-icon"></i>
-    //   // </router-link> */}
-    //   </div>
-    // </CSSTransition>
   )
 }
 

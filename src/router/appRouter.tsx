@@ -1,9 +1,10 @@
 // 展示  等待页 || 登录页 || 正式路由页面
 import { useEffect, useState } from 'react'
-import { BrowserRouter, HashRouter, Routes, Route, useRoutes } from 'react-router-dom'
+import { HashRouter } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import { setUserInfoAction } from '@/store/action'
-import { getLocalUser } from '@/utils'
+import { getLocalUser, getToken } from '@/utils'
+// import { getLocalUser, getToken } from '@/store/hooks/user'
 import { Spin } from 'antd'
 import RouterList from './index'
 
@@ -12,20 +13,12 @@ import Login from '@/pages/login'
 function AppRouter() {
   console.log('appRouter---')
   const [loading, setLoad] = useState(true)
-  const userInfo = useSelector((state: State) => state.user)
+  const token = useSelector((state: State) => state.user.token)
   const dispatch = useDispatch()
-
   useEffect(() => {
-    // 副作用参数 只有当参数二发送改变才会执行参数1
-    console.log('执行useEffect', userInfo)
-    if (!userInfo) {
-      const localInfo = getLocalUser()
-      if (localInfo && localInfo.isLogin === true) {
-        dispatch(setUserInfoAction(localInfo))
-      }
-    }
+    console.log('执行useEffect', token)
     setLoad(false)
-  }, [userInfo, dispatch])
+  }, [token, dispatch])
 
   if (loading)
     return (
@@ -33,8 +26,7 @@ function AppRouter() {
         <div className="app" />
       </Spin>
     )
-
-  if (!userInfo) return <Login />
+  if (!token) return <Login />
 
   return (
     <HashRouter>

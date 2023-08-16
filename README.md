@@ -74,43 +74,6 @@ D:\react-ant-admin>cnpm i
 D:\react-ant-admin>npm run start
 ```
 
-## 创建一个新的页面
-
-1. 在 src/pages 文件夹下创建一个 test.tsx 文件,代码如下
-
-```js
-// 函数组件
-export default function Test() {
-  return <div>test页面</div>;
-}
-
-/**
- * MENU_* 开头信息在 package.json(在webpack分支中) 文件中找到
- * 给 pages 组件追加路由信息
- * export default 组件的原型上添加route信息,或者向外暴露一个 route
- * 会被vite的vite-plugin-react-router-generator插件捕获信息
- */
-
-// 1.被捕获 export default 原型上的route
-Test.route={
-  [MENU_TITLE] : "test页面",
-  [MENU_KEY] : "test",
-  [MENU_PATH]: "/test",
-  [MENU_LAYOUT]:"FULLSCREEN" // 该页面全屏显示 默认可以不填
-}
-
-// 2.被捕获 暴露的route信息  优先级比上面高
-export const route = {
-  [MENU_TITLE] : "test页面",
-  [MENU_KEY] : "test",
-  [MENU_PATH]: "/test",
-  [MENU_LAYOUT]:"FULLSCREEN" // 该页面全屏显示 默认可以不填
-}
-```
-
-2. 浏览器访问 `http://localhost:3000/react-ant-admin/test` 即可
-
-
 ## 脚本启动
 
 在完成依赖安装之后,有以下几种启动方式。
@@ -129,12 +92,15 @@ export const route = {
 
 - npm run preview
 
-
-
 ####
 
 npm install @loadable/component -D 动态加载
 
+
+### todo 
+主题
 keepAlive
-: 
-"true"
+content
+适配V6
+content 专场动画
+

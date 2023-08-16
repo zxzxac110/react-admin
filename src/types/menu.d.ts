@@ -2,7 +2,8 @@ declare type MenuAction = {
   type: string
   keys: string[]
   menuItem: OpenedMenu
-  list: MenuItem[],
+  list: MenuItem[]
+  collapsed: boolean
   path: string
 }
 
@@ -14,6 +15,7 @@ declare interface OpenedMenu {
 }
 
 declare interface MenuState {
+  collapsed: boolean
   openedMenu: OpenedMenu[]
   openMenuKey: string[]
   selectMenuKey: string[]
