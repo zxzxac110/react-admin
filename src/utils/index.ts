@@ -4,6 +4,17 @@ export const USER_INFO = "USER_INFO"; // 用户信息
 export const TOKEN = "REACT_ADMIN_TOKEN"; // token
 export const MENU = "MENU"; // 菜单
 
+// 打印内容显示在页面上
+export function fieldShowPage(field: number | string | object): string {
+  if (typeof field === 'string') {
+    return field
+  } else if (typeof field === 'number') {
+    return field + ''
+  } else {
+    return JSON.stringify(field)
+  }
+}
+
 /**
  * 存储方式
  * @param isLocal 是否永久 

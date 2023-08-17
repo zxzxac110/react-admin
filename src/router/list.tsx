@@ -150,7 +150,21 @@ const auto = [
 auto.forEach((item) => {
   const { ...anyProps } = item
   const Com = loadable(item.components, {
-    fallback: <Spin style={fellbackStyle} tip="页面加载中...." />,
+    fallback: (
+      <div
+        style={{
+          position: 'absolute',
+          bottom: 0,
+          left: 0,
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          width: '100%',
+          height: '100%',
+        }}>
+        <Spin size="large"></Spin>
+      </div>
+    ),
   })
   const info = { ...anyProps, components: <Com /> }
   asyncRouter.push(info)

@@ -102,5 +102,4 @@ npm install @loadable/component -D 动态加载
 keepAlive
 content
 适配V6
-content 专场动画
-
+刷新选择菜单栏
