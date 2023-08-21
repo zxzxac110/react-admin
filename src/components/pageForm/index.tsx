@@ -2,41 +2,37 @@ import { Form, Input, Select, DatePicker, Button } from 'antd'
 import type { TimeRangePickerProps, FormInstance } from 'antd'
 import dayjs from 'dayjs'
 import 'dayjs/locale/zh-cn'
-import { useRef, useState } from 'react'
+import { useRef, useMemo, useCallback, ReactNode } from 'react'
 
 dayjs.locale('zh-cn') // 日期国际化
 const format = 'YYYY/MM/DD HH:mm:ss'
+interface PageFormProps {
+  data: Record<string, any>
+  columns: PageFormColumns
+  submit: (v: Record<string, any>) => void
+}
+let timeWhetherChange = true // 确保用户已经执行完了操作锁
 
-function PageForm() {
+function PageForm(props: PageFormProps) {
   const formRef = useRef<FormInstance>(null)
-  const [timeWhetherChange, setTimeWhetherChange] = useState(false)
-  const [formData, setFormData] = useState({
-    username: '姓名',
-    gender: '1',
-    create_time: [dayjs().startOf('day'), dayjs().endOf('day')],
-    start_time: dayjs().startOf('day').format('YYYY/MM/DD HH:mm:ss'),
-    end_time: dayjs().endOf('day').format('YYYY/MM/DD HH:mm:ss'),
-  })
-
   function submit() {
     const data = formRef.current?.getFieldsValue() || {}
-    console.log({
-      ...data,
-      start_time: data.create_time ? dayjs(data.create_time[0]).format(format) : '',
-      end_time: data.create_time ? dayjs(data.create_time[1]).format(format) : '',
-    })
+    props.submit(data)
   }
 
-  // 日期时间选择器
-  function onPickerChange() {
-    setTimeWhetherChange(true)
+  function onPickerChange(changedValues: Record<string, any>) {
+    timeWhetherChange = true
+    // 点击清除日期时间选择器
+    if (JSON.stringify(changedValues).indexOf('null') > -1) {
+      submit()
+    }
   }
   // 时间选择器打开关闭
   // 确保用户已经执行完了操作
   // 定时器 延迟触发
   function onOpenChange(open: boolean) {
     if (open) {
-      setTimeWhetherChange(false)
+      timeWhetherChange = false
     } else if (timeWhetherChange) {
       setTimeout(() => {
         submit()
@@ -61,51 +57,62 @@ function PageForm() {
     },
   ]
 
+  const genFromElement = useCallback((e: PageFormColumn): ReactNode => {
+    const com = {
+      Input: genInput,
+      Select: genSelect,
+      RangePicker: genRangePicker,
+    }[e.type]
+    return com ? com(e) : <></>
+  }, [])
+
+  const formBody = useMemo(() => {
+    return props.columns.map((e: PageFormColumn) => {
+      return (
+        <Form.Item label={e.label} name={e.name}>
+          {genFromElement(e)}
+        </Form.Item>
+      )
+    })
+  }, [props.columns, genFromElement])
+
+  function genInput(e: PageFormColumn): ReactNode {
+    return (
+      <Input allowClear placeholder={(e.placeholder as string) || '请输入'} onPressEnter={submit} />
+    )
+  }
+  function genSelect(e: PageFormColumn): ReactNode {
+    return (
+      <Select
+        allowClear
+        placeholder={(e.placeholder as string) || '请输入'}
+        onChange={submit}
+        style={e.style}
+        options={e.options}></Select>
+    )
+  }
+  function genRangePicker(e: PageFormColumn): ReactNode {
+    return (
+      <DatePicker.RangePicker
+        presets={rangePresets}
+        style={{ width: '350px' }}
+        showTime={{
+          defaultValue: [dayjs('00:00:00', 'HH:mm:ss'), dayjs('00:00:00', 'HH:mm:ss')],
+        }}
+        placeholder={(e.placeholder as [string, string]) || ['开始时间', '结束时间']}
+        format={format}
+        onOpenChange={onOpenChange}
+      />
+    )
+  }
   return (
-    <div className="page-box pb-0">
-      <Form ref={formRef} layout="inline" initialValues={formData}>
-        <Form.Item label="姓名" name="username">
-          <Input allowClear placeholder="请输入" onPressEnter={submit} />
-        </Form.Item>
-
-        <Form.Item label="性别" name="gender">
-          <Select
-            allowClear
-            placeholder="请选择"
-            onChange={submit}
-            style={{ width: 100 }}
-            options={[
-              { value: '1', label: '男' },
-              { value: '2', label: '女' },
-            ]}></Select>
-        </Form.Item>
-
-        <Form.Item label="创建时间" name="create_time">
-          <DatePicker.RangePicker
-            presets={rangePresets}
-            style={{ width: '350px' }}
-            showTime={{
-              defaultValue: [dayjs('00:00:00', 'HH:mm:ss'), dayjs('00:00:00', 'HH:mm:ss')],
-            }}
-            placeholder={['开始时间', '结束时间']}
-            format={format}
-            onChange={onPickerChange}
-            onOpenChange={onOpenChange}
-          />
-        </Form.Item>
-        <Form.Item label="创建时间" name="create_time">
-          <DatePicker.RangePicker
-            presets={rangePresets}
-            style={{ width: '350px' }}
-            showTime={{
-              defaultValue: [dayjs('00:00:00', 'HH:mm:ss'), dayjs('00:00:00', 'HH:mm:ss')],
-            }}
-            placeholder={['开始时间', '结束时间']}
-            format={format}
-            onChange={onPickerChange}
-            onOpenChange={onOpenChange}
-          />
-        </Form.Item>
+    <div id="page-form" className="page-box pb-0">
+      <Form
+        ref={formRef}
+        layout="inline"
+        initialValues={props.data}
+        onValuesChange={onPickerChange}>
+        {...formBody}
       </Form>
       <div>
         <Button className="mr-4" type="primary" onClick={submit}>

@@ -16,7 +16,7 @@ function AppRouter() {
   const token = useSelector((state: State) => state.user.token)
   const dispatch = useDispatch()
   useEffect(() => {
-    console.log('执行useEffect', token)
+    console.log('执行useEffect')
     setLoad(false)
   }, [token, dispatch])
 

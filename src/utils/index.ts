@@ -15,6 +15,20 @@ export function fieldShowPage(field: number | string | object): string {
   }
 }
 
+// 获取地址栏参数
+export function getQuery() {
+  const url = location.search
+  const query: Record<string, any> = {}
+  if (url.indexOf('?') != -1) {
+    const str = url.substr(1)
+    const strs = str.split('&')
+    for (let i = 0; i < strs.length; i++) {
+      query[strs[i].split('=')[0]] = unescape(strs[i].split('=')[1])
+    }
+  }
+  return query
+}
+
 /**
  * 存储方式
  * @param isLocal 是否永久 
@@ -91,9 +105,7 @@ function saveLocalMenu(list: MenuResponse) {
 }
 export async function getMenus() {
   let localMenu = getLocalMenu();
-  console.log('获取菜单', localMenu, !!localMenu)
   if (localMenu) { return localMenu }
-  console.log(666666666)
   localMenu = await getMenu()
   saveLocalMenu(localMenu);
   return localMenu

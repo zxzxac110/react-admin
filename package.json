@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "npx env-cmd --verbose -e dev vite",
-    "dev:mock": "env-cmd --verbose -e dev_mock vite",
+    "dev_mock": "env-cmd --verbose -e dev_mock vite",
     "build": "env-cmd --verbose -e build vite build",
     "build:test": "env-cmd --verbose -e test vite build",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",

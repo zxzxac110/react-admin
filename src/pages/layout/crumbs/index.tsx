@@ -1,11 +1,11 @@
-import { useEffect, useMemo, useState } from 'react'
+import { useMemo } from 'react'
 import { Breadcrumb } from 'antd'
 import { useStateMenuList } from '@/store/hooks'
 import { useLocation } from 'react-router-dom'
 
 function getBreadArray(list: MenuList, pathname: string): Record<string, string>[] {
   let arr: Record<string, string>[] = [{ a: 'a' }]
-  const item = list.find((e) => pathname.indexOf(e.path))
+  const item = list.find((e) => pathname.indexOf(e.path) > -1)
   if (item) {
     arr.push({
       title: item.title,
@@ -24,7 +24,7 @@ function Crumbs() {
     return getBreadArray(menu, location.pathname)
   }, [menu, location])
   return (
-    <div className="page-box">
+    <div id="crumbs" className="page-box">
       <Breadcrumb items={breadcrumbItems}></Breadcrumb>
     </div>
   )

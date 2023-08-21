@@ -70,7 +70,6 @@ http.interceptors.response.use(
       const { msg, status } = response.data;
       if (status === 1) {
         message.error(msg);
-        console.log(123456)
         return Promise.reject(msg);
       }
     }

@@ -2,7 +2,7 @@ import React from 'react'
 
 interface Props {
   name: string
-  myClass: string
+  myClass?: string
 }
 
 const SvgIcon: React.FC<Props> = ({ name, myClass }) => {

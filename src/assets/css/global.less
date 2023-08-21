@@ -379,5 +379,45 @@ table {
   border-radius: 5px;
   box-sizing: border-box;
   overflow: auto;
+}
 
+.page-table {
+  // 表格内容高度固定  溢出滚动 start
+  .ant-table-wrapper,
+  .ant-spin-nested-loading,
+  .ant-spin-container {
+    height: 100%;
+  }
+  .ant-table.ant-table-bordered {
+    // -分页
+    height: calc(100% - 64px);
+  }
+  .ant-table-container {
+    border: 1px solid #f0f0f0;
+    height: 100%;
+    overflow: auto; // 单独 表内容滚动会有样式问题 只好选择整个表都滚动了 + 属性sticky
+  }
+  // .ant-table-body {
+  //   // - 表头
+  //   height: calc(100% - 55px);
+  //   overflow: auto;
+  // }
+  // 表格内容高度固定  溢出滚动 end
+  .ant-table-tbody .ant-table-placeholder td {
+    border-bottom: 0 !important;
+    border-right: 0 !important;
+  }
+  .ant-table-row td:last-child,
+  tr th:last-child {
+    border-right: 0 !important;
+  }
+
+  *::-webkit-scrollbar {
+    width: -5px;
+  }
+  *::-webkit-scrollbar-track {
+    /*滚动条里面轨道*/
+    border-radius: 0;
+    background: #f0f0f0;
+  }
 }

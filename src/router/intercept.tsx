@@ -22,16 +22,13 @@ interface Props {
 // 路由拦截
 // 菜单 组件 标题 路径 key
 function Intercept({ components, title, path: pagePath, pageKey }: Props) {
-  console.log('Intercept', pageKey, title, pagePath)
   const [pageInit, setPageInit] = useState(false)
   const location = useLocation()
   // const {  stateAddOpenedMenu, stateSetCurrentPath } = useDispatchMenu()
   const currentPath = useMemo(() => {
     const { pathname, search } = location
-    console.log(location)
     return pathname + search
   }, [location])
-  console.log(currentPath)
   // 监听 location 改变
   const onPathChange = useCallback(() => {
     console.log('监听 location 改变', title)
@@ -50,7 +47,6 @@ function Intercept({ components, title, path: pagePath, pageKey }: Props) {
 
   const init = useCallback(() => {
     setCurrentPageInfo()
-    console.log(title)
     scrollPage()
   }, [setCurrentPageInfo])
 
