@@ -89,7 +89,7 @@ function Card() {
       title: '菜单图标',
       dataIndex: 'icon',
       key: 'icon',
-      render: (_, { configure }) => <SvgIcon name={configure.icon}></SvgIcon>,
+      render: (_, { icon }) => <SvgIcon name={icon}></SvgIcon>,
     },
     {
       title: '权重',

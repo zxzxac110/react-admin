@@ -1,3 +1,5 @@
+// 页面上的搜索表单
+
 import { Form, Input, Select, DatePicker, Button } from 'antd'
 import type { TimeRangePickerProps, FormInstance } from 'antd'
 import dayjs from 'dayjs'
@@ -7,9 +9,11 @@ import { useRef, useMemo, useCallback, ReactNode } from 'react'
 dayjs.locale('zh-cn') // 日期国际化
 const format = 'YYYY/MM/DD HH:mm:ss'
 interface PageFormProps {
-  data: Record<string, any>
-  columns: PageFormColumns
-  submit: (v: Record<string, any>) => void
+  data?: Record<string, any>
+  columns?: PageFormColumns
+  submit?: (v: Record<string, any>) => void
+  hideSearch?: boolean
+  btnsProps?: BtnsProps
 }
 let timeWhetherChange = true // 确保用户已经执行完了操作锁
 
@@ -17,7 +21,9 @@ function PageForm(props: PageFormProps) {
   const formRef = useRef<FormInstance>(null)
   function submit() {
     const data = formRef.current?.getFieldsValue() || {}
-    props.submit(data)
+    if (props.submit) {
+      props.submit(data)
+    }
   }
 
   function onPickerChange(changedValues: Record<string, any>) {
@@ -56,7 +62,10 @@ function PageForm(props: PageFormProps) {
       value: [dayjs().add(-3, 'month').startOf('day'), dayjs().startOf('day')],
     },
   ]
-
+  function getFromValue() {
+    console.log(formRef.current?.getFieldsValue())
+    return formRef.current?.getFieldsValue() || {}
+  }
   const genFromElement = useCallback((e: PageFormColumn): ReactNode => {
     const com = {
       Input: genInput,
@@ -65,17 +74,6 @@ function PageForm(props: PageFormProps) {
     }[e.type]
     return com ? com(e) : <></>
   }, [])
-
-  const formBody = useMemo(() => {
-    return props.columns.map((e: PageFormColumn) => {
-      return (
-        <Form.Item label={e.label} name={e.name}>
-          {genFromElement(e)}
-        </Form.Item>
-      )
-    })
-  }, [props.columns, genFromElement])
-
   function genInput(e: PageFormColumn): ReactNode {
     return (
       <Input allowClear placeholder={(e.placeholder as string) || '请输入'} onPressEnter={submit} />
@@ -105,6 +103,30 @@ function PageForm(props: PageFormProps) {
       />
     )
   }
+
+  const formBody = useMemo(() => {
+    return (
+      props.columns?.map((e: PageFormColumn) => {
+        return (
+          <Form.Item label={e.label} name={e.name}>
+            {genFromElement(e)}
+          </Form.Item>
+        )
+      }) || []
+    )
+  }, [props.columns, genFromElement])
+  const formBtns = useMemo(() => {
+    return (
+      props.btnsProps?.map((e: BtnProps) => {
+        return (
+          <Button onClick={() => e.click(getFromValue())} type={e.type}>
+            {e.text}
+          </Button>
+        )
+      }) || []
+    )
+  }, [props.btnsProps])
+
   return (
     <div id="page-form" className="page-box pb-0">
       <Form
@@ -115,10 +137,14 @@ function PageForm(props: PageFormProps) {
         {...formBody}
       </Form>
       <div>
-        <Button className="mr-4" type="primary" onClick={submit}>
-          搜索
-        </Button>
-        <Button type="primary">创建</Button>
+        {props.hideSearch ? (
+          <></>
+        ) : (
+          <Button className="mr-4" type="primary" onClick={submit}>
+            搜索
+          </Button>
+        )}
+        {...formBtns}
       </div>
     </div>
   )

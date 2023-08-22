@@ -33,9 +33,9 @@ async function getMenuList() {
         "type": 1,
         "label": "用户运营",
         "name": "userManage",
-        "configure": {
-          "icon": ""
-        },
+
+        "icon": "",
+
         "sort": 0,
         "editable": true,
         "created_at": "2021-12-06 17:22:47",
@@ -47,9 +47,9 @@ async function getMenuList() {
             "type": 1,
             "label": "用户管理",
             "name": "userManage",
-            "configure": {
-              "icon": "user-linear"
-            },
+
+            "icon": "user-linear",
+
             "sort": 0,
             "editable": true,
             "created_at": "2021-12-06 17:23:01",
@@ -61,9 +61,9 @@ async function getMenuList() {
             "type": 1,
             "label": "会员管理",
             "name": "vip",
-            "configure": {
-              "icon": "vip"
-            },
+
+            "icon": "vip",
+
             "sort": 0,
             "editable": true,
             "created_at": "2021-12-06 17:32:59",
@@ -77,9 +77,9 @@ async function getMenuList() {
         "type": 1,
         "label": "个人号运营",
         "name": "userManage",
-        "configure": {
-          "icon": ""
-        },
+
+        "icon": "",
+
         "sort": 0,
         "editable": true,
         "created_at": "2022-01-04 15:03:46",
@@ -91,9 +91,9 @@ async function getMenuList() {
             "type": 1,
             "label": "个人号管理",
             "name": "personageManage",
-            "configure": {
-              "icon": "personage-manage"
-            },
+
+            "icon": "personage-manage",
+
             "sort": 0,
             "editable": true,
             "created_at": "2022-01-04 15:04:27",
@@ -107,7 +107,6 @@ async function getMenuList() {
         "type": 1,
         "label": "社群运营",
         "name": "communityManagement",
-        "configure": [],
         "sort": 2,
         "editable": true,
         "created_at": "2022-01-04 14:51:24",
@@ -119,9 +118,9 @@ async function getMenuList() {
             "type": 1,
             "label": "社群管理",
             "name": "communityManagement",
-            "configure": {
-              "icon": "ic_sq"
-            },
+
+            "icon": "ic_sq",
+
             "sort": 0,
             "editable": true,
             "created_at": "2022-01-04 14:57:06",
@@ -133,9 +132,9 @@ async function getMenuList() {
             "type": 1,
             "label": "群发管理",
             "name": "chatMessageTasksGroup",
-            "configure": {
-              "icon": "ic_qf"
-            },
+
+            "icon": "ic_qf",
+
             "sort": 0,
             "editable": true,
             "created_at": "2022-01-04 14:57:42",
@@ -147,9 +146,9 @@ async function getMenuList() {
             "type": 1,
             "label": "社群设置",
             "name": "groupAnnouncement",
-            "configure": {
-              "icon": "ic_qsz"
-            },
+
+            "icon": "ic_qsz",
+
             "sort": 0,
             "editable": true,
             "created_at": "2022-01-04 14:58:04",
@@ -163,7 +162,6 @@ async function getMenuList() {
         "type": 1,
         "label": "商城管理",
         "name": "template",
-        "configure": [],
         "sort": 4,
         "editable": true,
         "created_at": "2021-12-06 11:33:33",
@@ -175,9 +173,9 @@ async function getMenuList() {
             "type": 1,
             "label": "售后管理",
             "name": "afterSale",
-            "configure": {
-              "icon": "ic_sh_gray"
-            },
+
+            "icon": "ic_sh_gray",
+
             "sort": 4,
             "editable": true,
             "created_at": "2021-12-06 11:33:33",
@@ -189,9 +187,9 @@ async function getMenuList() {
             "type": 1,
             "label": "订单管理",
             "name": "orderManage",
-            "configure": {
-              "icon": "ic_dd_gray"
-            },
+
+            "icon": "ic_dd_gray",
+
             "sort": 3,
             "editable": true,
             "created_at": "2021-12-06 11:33:33",
@@ -203,9 +201,9 @@ async function getMenuList() {
             "type": 1,
             "label": "商品管理",
             "name": "shop",
-            "configure": {
-              "icon": "ic_sp_gray"
-            },
+
+            "icon": "ic_sp_gray",
+
             "sort": 2,
             "editable": true,
             "created_at": "2021-12-06 11:33:33",
@@ -217,9 +215,9 @@ async function getMenuList() {
             "type": 1,
             "label": "模板页",
             "name": "template",
-            "configure": {
-              "icon": "mb"
-            },
+
+            "icon": "mb",
+
             "sort": 1,
             "editable": true,
             "created_at": "2021-12-06 11:33:33",
@@ -231,9 +229,9 @@ async function getMenuList() {
             "type": 1,
             "label": "分组管理",
             "name": "groupManage",
-            "configure": {
-              "icon": "tabs"
-            },
+
+            "icon": "tabs",
+
             "sort": 0,
             "editable": true,
             "created_at": "2021-12-06 11:33:33",
@@ -245,9 +243,9 @@ async function getMenuList() {
             "type": 1,
             "label": "素材管理",
             "name": "materials",
-            "configure": {
-              "icon": "material"
-            },
+
+            "icon": "material",
+
             "sort": 0,
             "editable": true,
             "created_at": "2021-12-06 11:33:33",
@@ -261,9 +259,9 @@ async function getMenuList() {
         "type": 1,
         "label": "系统设置",
         "name": "setTag",
-        "configure": {
-          "icon": "set"
-        },
+
+        "icon": "set",
+
         "sort": 7,
         "editable": true,
         "created_at": "2021-12-06 11:33:40",
@@ -275,9 +273,9 @@ async function getMenuList() {
             "type": 1,
             "label": "管理员",
             "name": "rightsProfile",
-            "configure": {
-              "icon": null
-            },
+
+            "icon": null,
+
             "sort": 4,
             "editable": false,
             "created_at": "2021-12-06 11:33:40",
@@ -289,9 +287,9 @@ async function getMenuList() {
             "type": 1,
             "label": "管理员组",
             "name": "roleManagement",
-            "configure": {
-              "icon": null
-            },
+
+            "icon": null,
+
             "sort": 3,
             "editable": false,
             "created_at": "2021-12-06 11:33:40",
@@ -303,9 +301,9 @@ async function getMenuList() {
             "type": 1,
             "label": "店铺管理",
             "name": "storeManagement",
-            "configure": {
-              "icon": null
-            },
+
+            "icon": null,
+
             "sort": 2,
             "editable": false,
             "created_at": "2021-12-06 11:41:05",
@@ -637,6 +635,7 @@ const MockData: MockDataType = {
 };
 type UrlType = keyof MockDataType
 function get(url: UrlType) {
+  console.log('请求数据', url)
   if (url.indexOf('/menus') > -1) {
     return getMenuList()
   }
@@ -646,6 +645,7 @@ function get(url: UrlType) {
 
 
 function post(url: UrlType, data: any = {}) {
+  console.log('请求数据', url, data)
   return new Promise((res) => {
     setTimeout(() => {
       switch (url) {
@@ -704,26 +704,24 @@ function post(url: UrlType, data: any = {}) {
           }
           return res(msg);
         default:
-          res({ status: 1, msg: "暂无" });
+          res({});
           break;
       }
-    }, 100);
+    }, 1000);
   }).then((res: any) => {
-    if (res.status === 0) {
-      return res
-    } else {
-      message.error("接口暂未配置")
-      return Promise.reject("接口暂未配置")
-    }
+    return res
   });
 }
 
-function put() {
-
+async function put(data: any, data2: any) {
+  console.log('请求数据', data, data2)
+  return await delay({})
 }
-function del() {
-
+async function del(data: any) {
+  console.log('请求数据', data)
+  return await delay({})
 }
+
 const mock = {
   get,
   post,

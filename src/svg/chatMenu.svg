@@ -1,0 +1,18 @@
+<svg id="更多操作" xmlns="http://www.w3.org/2000/svg" width="27" height="27" viewBox="0 0 27 27">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #fff;
+        stroke: #c9c9ff;
+        stroke-width: 2px;
+      }
+
+      .cls-2 {
+        fill: #6e6eff;
+        fill-rule: evenodd;
+      }
+    </style>
+  </defs>
+  <rect id="矩形_1_拷贝_4" data-name="矩形 1 拷贝 4" class="cls-1" x="1" y="1" width="25" height="25"/>
+  <path id="椭圆_1_拷贝_2" data-name="椭圆 1 拷贝 2" class="cls-2" d="M966.9,331.6a1.9,1.9,0,1,1-1.9,1.9A1.9,1.9,0,0,1,966.9,331.6Zm4.6,0a1.9,1.9,0,1,1-1.9,1.9A1.9,1.9,0,0,1,971.5,331.6Zm4.6,0a1.9,1.9,0,1,1-1.9,1.9A1.9,1.9,0,0,1,976.1,331.6Z" transform="translate(-958 -320)"/>
+</svg>

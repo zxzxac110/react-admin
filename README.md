@@ -96,10 +96,16 @@ D:\react-ant-admin>npm run start
 
 npm install @loadable/component -D 动态加载
 
+### todo
 
-### todo 
 主题
 keepAlive
 content
-适配V6
+适配 V6
 刷新选择菜单栏
+一个列子页面
+管理员
+权限
+菜单
+axios 配置
+窗口放大侧边菜单

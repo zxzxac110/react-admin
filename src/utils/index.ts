@@ -29,6 +29,10 @@ export function getQuery() {
   return query
 }
 
+// function genFormElement() {
+//  />
+// }
+
 /**
  * 存储方式
  * @param isLocal 是否永久 

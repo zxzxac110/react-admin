@@ -17,11 +17,17 @@ const LayoutContainer = () => {
         <Logo></Logo>
         <Sidebar></Sidebar>
       </div>
-      <div className="flex1">
-        <Header></Header>
-        <div className="content-box">
-          <Crumbs></Crumbs>
-          <Outlet></Outlet>
+      <div className="flex1 overflow-hidden">
+        <div
+          style={{
+            width: '100%',
+            overflow: 'hidden',
+          }}>
+          <Header></Header>
+          <div className="content-box">
+            <Crumbs></Crumbs>
+            <Outlet></Outlet>
+          </div>
         </div>
       </div>
     </div>

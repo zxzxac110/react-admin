@@ -112,7 +112,7 @@ const auto = [
   {
     path: 'power/menu',
     key: 'powerMenu',
-    components: () => import('@/pages/a1/menu'),
+    components: () => import('@/pages/menu'),
   },
 
   {
