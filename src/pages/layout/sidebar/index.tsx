@@ -1,7 +1,8 @@
 import React, { useMemo, useState } from 'react'
+import { useLocation } from 'react-router-dom'
 import { useStateMenuList, useStateCollapsed } from '@/store/hooks/menu'
 import { Link } from 'react-router-dom'
-import { Menu, Button } from 'antd'
+import { Menu } from 'antd'
 import SvgIcon from '@/components/svgIcon'
 import type { MenuProps } from 'antd/es/menu'
 type AntdMenuItem = Required<MenuProps>['items'][number]
@@ -35,16 +36,38 @@ const renderMenu = (item: MenuItem, path: string): AntdMenuItem => {
   )
 }
 
-const FlexBox = ({ children }: { children: JSX.Element }) => {
-  return <div className="layout-sidebar-menu">{children}</div>
+function convertPathToArray(path: string) {
+  // /xx1/xx2/xx3...  转化成 [xx1 , .. , xx1Xx2Xx3..]
+  const pathArray = path.split('/').filter((item) => item !== '')
+
+  function recursiveConvert(index: number): string[] {
+    if (index > pathArray.length) {
+      return []
+    }
+
+    const currentPath = pathArray
+      .slice(0, index)
+      .map((item: string, index) => {
+        return index > 0 ? item.charAt(0).toUpperCase() + item.slice(1) : item
+      })
+      .join('')
+
+    const restPaths = recursiveConvert(index + 1)
+    return [currentPath, ...restPaths]
+  }
+
+  return recursiveConvert(1)
 }
 
 const SidebarMenu = () => {
   const menuList = useStateMenuList() // 菜单列表
   const collapsed = useStateCollapsed()
-
+  const location = useLocation()
+  const pathname = convertPathToArray(location.pathname)
   // const openKeys = menuList.map(e => e.key)
-  const [openKeys, setOpenKeys] = useState<string[]>([]) // 当前展开的 SubMenu 菜单项 key 数组
+  const defaultSelectedKeys = pathname.splice(-1) // 初始选中的菜单项 key 数组
+  const [openKeys, setOpenKeys] = useState<string[]>(pathname) // 当前展开的 SubMenu 菜单项 key 数组
+  console.log(menuList, openKeys, defaultSelectedKeys)
   // 打开父菜单
   function onOpenChange(keys: string[]) {
     setOpenKeys(keys.length ? [keys[keys.length - 1]] : [])
@@ -55,16 +78,17 @@ const SidebarMenu = () => {
 
   return (
     <div>
-      <FlexBox>
+      <div className="layout-sidebar-menu">
         <Menu
           mode="inline"
           // triggerSubMenuAction="click"
           inlineCollapsed={collapsed}
           openKeys={openKeys}
+          defaultSelectedKeys={defaultSelectedKeys}
           onOpenChange={onOpenChange}
           items={menuComponent}
         />
-      </FlexBox>
+      </div>
     </div>
   )
 }

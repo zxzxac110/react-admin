@@ -28,3 +28,9 @@ declare interface State {
   componentsVisible: componentsVisible
   theme: StateTheme
 }
+
+// 通用组件实例
+declare interface ComponentInstance {
+  [key: string]: any
+}
+

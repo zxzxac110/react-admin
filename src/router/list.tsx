@@ -171,23 +171,3 @@ auto.forEach((item) => {
 })
 
 export default { asyncRouter, constRouter }
-// [
-//   "icon_locking",
-//   "icon_feeding",
-//   "icon_addresslist",
-//   "icon_github",
-//   "icon_close",
-//   "icon_edit",
-//   "icon_form",
-//   "icon_voiceprint",
-//   "icon_MTR",
-//   "icon_set",
-//   "icon_menu",
-//   "icon_infopersonal",
-//   "icon_privacy_closed",
-//   "",
-//   "",
-//   "",
-//   "icon_pen",
-//   "icon_setting"
-// ]
