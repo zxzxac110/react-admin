@@ -32,6 +32,9 @@ const MenuModal = forwardRef((props: MenuFormProps, ref) => {
           value: e.id,
           label: e.label,
         })),
+        props: {
+          disabled: initialValue.id && !initialValue.menu_id,
+        },
       },
       {
         label: '菜单标题',
@@ -69,7 +72,7 @@ const MenuModal = forwardRef((props: MenuFormProps, ref) => {
         ),
       },
     ]
-  }, [props.menus, initialValue])
+  }, [props.menus, initialValue, type])
 
   // 打开icon弹窗
   const svgDialogRef = useRef<ComponentInstance>()
@@ -86,13 +89,14 @@ const MenuModal = forwardRef((props: MenuFormProps, ref) => {
   function open(row: Record<string, any>, type?: FromDialogType) {
     console.log(row, type)
     formRef && formRef.resetFields()
-    if (!type) {
-      setInitialValue({})
-      formRef?.setFieldsValue({})
-    } else {
-      setInitialValue(row)
-      formRef?.setFieldsValue(row)
+    let data = {}
+    if (type === 'edit') {
+      data = row
+    } else if (type === 'addChild') {
+      data = { menu_id: row.id }
     }
+    formRef?.setFieldsValue(data)
+    setInitialValue(data)
     setType(type || 'add')
     setShow(true)
   }

@@ -1,4 +1,4 @@
-import { useNavigate } from 'react-router-dom'
+import { useEffect } from 'react'
 import { Button, Dropdown, MenuProps } from 'antd'
 import SvgIcon from '@/components/svgIcon'
 import userImage from '@/assets/images/user.png' // 使用 @ 别名引入图片
@@ -13,7 +13,6 @@ import { layout } from '@/utils/index'
 import './index.less'
 
 function Header() {
-  const navigate = useNavigate()
   const userInfo = useStateUserInfo()
   const collapsed = useStateCollapsed()
   const { stateClearToken } = useDispatchUser()
@@ -22,6 +21,13 @@ function Header() {
   function setCollapsed() {
     stateSetCollapsed(!collapsed)
   }
+
+  useEffect(() => {
+    stateSetCollapsed(document.body.clientWidth < 1500)
+    window.onresize = () => {
+      stateSetCollapsed(document.body.clientWidth < 1500)
+    }
+  }, [])
 
   const items: MenuProps['items'] = [
     {
