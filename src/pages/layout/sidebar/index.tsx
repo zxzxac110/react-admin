@@ -1,5 +1,5 @@
 import React, { useMemo, useState } from 'react'
-import { useLocation } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 import { useStateMenuList, useStateCollapsed } from '@/store/hooks/menu'
 import { Link } from 'react-router-dom'
 import { Menu } from 'antd'
@@ -63,6 +63,7 @@ const SidebarMenu = () => {
   const menuList = useStateMenuList() // 菜单列表
   const collapsed = useStateCollapsed()
   const location = useLocation()
+  const navigate = useNavigate()
   const pathname = convertPathToArray(location.pathname)
   // const openKeys = menuList.map(e => e.key)
   const defaultSelectedKeys = pathname.splice(-1) // 初始选中的菜单项 key 数组
@@ -75,7 +76,10 @@ const SidebarMenu = () => {
 
   // 菜单选项
   const menuComponent = useMemo(() => menuList.map((m) => renderMenu(m, '')), [menuList])
-
+  // 解决 折叠后一级菜单点击没有跳转
+  function onClick(key: Record<string, any>) {
+    navigate('/' + key.keyPath.join('/'))
+  }
   return (
     <div>
       <div className="layout-sidebar-menu">
@@ -84,6 +88,7 @@ const SidebarMenu = () => {
           // triggerSubMenuAction="click"
           inlineCollapsed={collapsed}
           openKeys={openKeys}
+          onClick={onClick}
           defaultSelectedKeys={defaultSelectedKeys}
           onOpenChange={onOpenChange}
           items={menuComponent}

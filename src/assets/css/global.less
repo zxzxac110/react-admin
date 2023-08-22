@@ -175,62 +175,6 @@ table {
   cursor: pointer;
 }
 
-/*1.弹窗*/
-/*
-  <div class="my-dialog">
-    <div class="my-dialog-box">
-      <div class="my-dialog-head">标题</div>
-      <div class="my-dialog-body">内容</div>
-      <div class="my-dialog-footer">底部</div>
-    </div>
-  </div>
-*/
-.my-dialog {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.7);
-  z-index: 2000;
-  display: flex;
-  justify-content: center;
-  align-content: center;
-  align-items: center;
-}
-
-.my-dialog .my-dialog-box {
-  width: 320px;
-  border-radius: 16px;
-  background: #fff;
-}
-
-.my-dialog .my-dialog-box .my-dialog-head {
-  text-align: left;
-  padding: 0.4rem 0;
-  line-height: 0.64rem;
-  font-size: 18px;
-}
-
-.my-dialog .my-dialog-box .my-dialog-body {
-  border-top: 1px solid #eee;
-  border-bottom: 1px solid #eee;
-  max-height: 270px;
-  background: #fff;
-  overflow: auto;
-}
-
-.my-dialog .my-dialog-box .my-dialog-footer {
-  display: flex;
-  justify-content: center;
-  align-content: center;
-  align-items: center;
-  color: #333;
-  font-weight: bold;
-  font-size: 16px;
-  height: 50px;
-}
-
 /* 页面变灰 */
 /*.allgray {
   filter:progid:DXImageTransform.Microsoft.BasicImage(grayscale=1);

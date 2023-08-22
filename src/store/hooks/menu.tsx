@@ -7,6 +7,7 @@ export const useStateCollapsed = () => useSelector((state: State) => state.menu.
 
 export function useDispatchMenu() {
   const dispatch = useDispatch()
+
   const stateSetMenuList = useCallback(
     (list: MenuItem[]) => dispatch(setUserMenu(list)),
     [dispatch]
@@ -14,7 +15,8 @@ export function useDispatchMenu() {
   const stateSetCollapsed = useCallback(
     (collapsed: boolean) => dispatch(setCollapsed(collapsed)),
     [dispatch]
-  ) // 设置菜单
+  )
+
   return {
     stateSetMenuList,
     stateSetCollapsed,

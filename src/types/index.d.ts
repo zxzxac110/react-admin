@@ -1,3 +1,11 @@
+declare type Theme = 'defaultTheme' | 'darkTheme'
+declare type AppState = {
+  theme:Theme
+}
+declare interface AppAction extends AppState {
+  type: string;
+}
+
 // 用户信息
 declare type UserInfo = {
   account: string
@@ -24,6 +32,7 @@ type Token = string | null | undefined
 declare interface State {
   menu: MenuState
   user: UserState
+  app: appState
   layout: LayoutMode[]
   componentsVisible: componentsVisible
   theme: StateTheme

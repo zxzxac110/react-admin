@@ -6,7 +6,9 @@ import {
   useDispatchUser,
   useStateUserInfo,
   useDispatchMenu,
+  useDispatchApp,
   useStateCollapsed,
+  useStateTheme,
 } from '@/store/hooks'
 import { layout } from '@/utils/index'
 
@@ -17,6 +19,9 @@ function Header() {
   const collapsed = useStateCollapsed()
   const { stateClearToken } = useDispatchUser()
   const { stateSetCollapsed } = useDispatchMenu()
+  const { stateSetTheme } = useDispatchApp()
+
+  const defaultSelectedKeys = [useStateTheme()]
 
   function setCollapsed() {
     stateSetCollapsed(!collapsed)
@@ -46,10 +51,43 @@ function Header() {
       ),
     },
   ]
+  const themes: MenuProps['items'] = [
+    {
+      key: 'group',
+      type: 'group',
+      label: '选择主题',
+      children: [
+        {
+          key: 'defaultTheme',
+          label: (
+            <div
+              style={{ width: '120px' }}
+              onClick={() => {
+                stateSetTheme('defaultTheme')
+              }}>
+              默认
+            </div>
+          ),
+        },
+        {
+          key: 'darkTheme',
+          label: (
+            <div
+              style={{ width: '120px' }}
+              onClick={() => {
+                stateSetTheme('darkTheme')
+              }}>
+              暗黑
+            </div>
+          ),
+        },
+      ],
+    },
+  ]
 
   return (
-    <div className="d-flex header align-center ">
-      <div className="line"></div>
+    <div className="d-flex header align-center secondary-border-bottom">
+      <div className="line secondary-line-bg"></div>
       <div className="hamburger-container " onClick={setCollapsed}>
         <svg
           className={'hamburger ' + (collapsed ? 'rotate' : '')}
@@ -61,6 +99,16 @@ function Header() {
         </svg>
       </div>
       <div className="flex1"></div>
+
+      <Dropdown
+        menu={{ items: themes, selectable: true, defaultSelectedKeys: defaultSelectedKeys }}
+        placement="bottom"
+        arrow={{ pointAtCenter: true }}>
+        <Button type="text" style={{ paddingTop: 0, paddingBottom: 0 }}>
+          <SvgIcon name="theme" myClass="font-30"></SvgIcon>
+        </Button>
+      </Dropdown>
+
       <Dropdown menu={{ items }} placement="bottom" arrow={{ pointAtCenter: true }}>
         <Button type="text" className="mr-5 avatar-btn">
           <img src={userInfo?.avatar || userImage} className="user-avatar mr-2" />

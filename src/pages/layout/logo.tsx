@@ -8,7 +8,7 @@ function Logo() {
 
   return (
     <div>
-      <div className="header sidebar-logo-container">
+      <div className="header sidebar-logo-container secondary-border-bottom">
         <Link to="/" className="full d-flex align-center justify-center">
           <SvgIcon name="logo" myClass="font-28"></SvgIcon>
           {collapsed ? '' : <img src={titleImage} className="title-svg ml-2" alt="" />}
