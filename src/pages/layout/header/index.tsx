@@ -28,9 +28,9 @@ function Header() {
   }
 
   useEffect(() => {
-    stateSetCollapsed(document.body.clientWidth < 1500)
+    stateSetCollapsed(document.body.clientWidth < 1200)
     window.onresize = () => {
-      stateSetCollapsed(document.body.clientWidth < 1500)
+      stateSetCollapsed(document.body.clientWidth < 1200)
     }
   }, [])
 

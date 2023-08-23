@@ -44,7 +44,7 @@ const MenuModal = forwardRef((props: MenuFormProps, ref) => {
       },
       {
         label: 'Key',
-        name: 'name',
+        name: 'key',
         placeholder: '请输入',
         type: 'Input',
       },

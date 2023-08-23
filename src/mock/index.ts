@@ -28,288 +28,211 @@ async function getMenuList() {
   const data = {
     "data": [
       {
-        "id": 50,
-        "menu_id": 0,
+        "id": 1,
+        "menu_id": "",
+        "path": "",
         "type": 1,
-        "label": "用户运营",
-        "name": "userManage",
-
-        "icon": "user",
-
-        "sort": 0,
+        "label": "表单页",
+        "key": "from",
+        "icon": "icon_form",
+        "sort": 3,
         "editable": true,
-        "created_at": "2021-12-06 17:22:47",
-        "updated_at": "2021-12-06 17:22:47",
-        "menus": [
+        "children": [
           {
-            "id": 51,
-            "menu_id": 50,
+            "id": 11,
+            "menu_id": 1,
+            "path": "/from/index",
             "type": 1,
-            "label": "用户管理",
-            "name": "userManage",
-
-            "icon": "user",
-
-            "sort": 0,
-            "editable": true,
-            "created_at": "2021-12-06 17:23:01",
-            "updated_at": "2021-12-06 17:23:01"
-          },
-          {
-            "id": 52,
-            "menu_id": 50,
-            "type": 1,
-            "label": "会员管理",
-            "name": "vip",
-
-            "icon": "user",
-
-            "sort": 0,
-            "editable": true,
-            "created_at": "2021-12-06 17:32:59",
-            "updated_at": "2021-12-06 17:32:59"
+            "label": "基础表单",
+            "key": "formIndex",
+            "icon": "",
+            "sort": 9654,
+            "editable": true
           }
         ]
       },
       {
-        "id": 72,
-        "menu_id": 0,
+        "id": 2,
+        "menu_id": "",
+        "path": "",
         "type": 1,
-        "label": "个人号运营",
-        "name": "userManage",
-
-        "icon": "user",
-
-        "sort": 0,
+        "label": "详情页",
+        "key": "details",
+        "icon": "icon_edit",
+        "sort": 3,
         "editable": true,
-        "created_at": "2022-01-04 15:03:46",
-        "updated_at": "2022-01-04 15:03:46",
-        "menus": [
+        "children": [
           {
-            "id": 73,
-            "menu_id": 72,
+            "id": 299,
+            "menu_id": 2,
+            "path": "/details/person",
             "type": 1,
-            "label": "个人号管理",
-            "name": "personageManage",
-
-            "icon": "user",
-
-            "sort": 0,
-            "editable": true,
-            "created_at": "2022-01-04 15:04:27",
-            "updated_at": "2022-01-04 15:04:27"
+            "label": "个人中心",
+            "key": "detailsPerson",
+            "icon": "icon_github",
+            "sort": 1,
+            "editable": true
           }
         ]
       },
       {
-        "id": 68,
-        "menu_id": 0,
+        "id": 3,
+        "menu_id": "",
         "type": 1,
-        "label": "社群运营",
-        "name": "communityManagement",
-        "sort": 2,
-        "editable": true,
-        "created_at": "2022-01-04 14:51:24",
-        "updated_at": "2022-01-04 15:05:58",
-        "menus": [
-          {
-            "id": 69,
-            "menu_id": 68,
-            "type": 1,
-            "label": "社群管理",
-            "name": "communityManagement",
-
-            "icon": "user",
-
-            "sort": 0,
-            "editable": true,
-            "created_at": "2022-01-04 14:57:06",
-            "updated_at": "2022-01-04 15:00:15"
-          },
-          {
-            "id": 70,
-            "menu_id": 68,
-            "type": 1,
-            "label": "群发管理",
-            "name": "chatMessageTasksGroup",
-
-            "icon": "user",
-
-            "sort": 0,
-            "editable": true,
-            "created_at": "2022-01-04 14:57:42",
-            "updated_at": "2022-01-04 14:59:39"
-          },
-          {
-            "id": 71,
-            "menu_id": 68,
-            "type": 1,
-            "label": "社群设置",
-            "name": "groupAnnouncement",
-
-            "icon": "user",
-
-            "sort": 0,
-            "editable": true,
-            "created_at": "2022-01-04 14:58:04",
-            "updated_at": "2022-01-04 14:58:04"
-          }
-        ]
-      },
-      {
-        "id": 37,
-        "menu_id": 0,
-        "type": 1,
-        "label": "商城管理",
-        "name": "template",
+        "label": "结果页",
+        "key": "result",
+        "icon": "icon_voiceprint",
         "sort": 4,
         "editable": true,
-        "created_at": "2021-12-06 11:33:33",
-        "updated_at": "2021-12-06 11:33:33",
-        "menus": [
+        "children": [
           {
-            "id": 41,
-            "menu_id": 37,
+            "id": 33,
+            "menu_id": 3,
+            "path": "/result/403",
             "type": 1,
-            "label": "售后管理",
-            "name": "afterSale",
-
-            "icon": "user",
-
-            "sort": 4,
-            "editable": true,
-            "created_at": "2021-12-06 11:33:33",
-            "updated_at": "2021-12-06 11:33:33"
+            "label": "403",
+            "key": "error403",
+            "icon": "icon_locking",
+            "sort": 0,
+            "editable": true
           },
           {
-            "id": 40,
-            "menu_id": 37,
+            "id": 34,
+            "menu_id": 3,
+            "path": "/result/404",
             "type": 1,
-            "label": "订单管理",
-            "name": "orderManage",
-
-            "icon": "user",
-
-            "sort": 3,
-            "editable": true,
-            "created_at": "2021-12-06 11:33:33",
-            "updated_at": "2021-12-06 11:33:33"
-          },
-          {
-            "id": 39,
-            "menu_id": 37,
-            "type": 1,
-            "label": "商品管理",
-            "name": "shop",
-
-            "icon": "user",
-
-            "sort": 2,
-            "editable": true,
-            "created_at": "2021-12-06 11:33:33",
-            "updated_at": "2021-12-06 11:33:33"
-          },
-          {
-            "id": 38,
-            "menu_id": 37,
-            "type": 1,
-            "label": "模板页",
-            "name": "template",
-
-            "icon": "user",
-
+            "label": "404",
+            "key": "error404",
+            "icon": "icon_close",
             "sort": 1,
-            "editable": true,
-            "created_at": "2021-12-06 11:33:33",
-            "updated_at": "2021-12-06 11:33:33"
+            "editable": true
           },
           {
-            "id": 43,
-            "menu_id": 37,
+            "id": 35,
+            "menu_id": 3,
+            "path": "/result/500",
             "type": 1,
-            "label": "分组管理",
-            "name": "groupManage",
-
-            "icon": "user",
-
-            "sort": 0,
-            "editable": true,
-            "created_at": "2021-12-06 11:33:33",
-            "updated_at": "2021-12-06 11:33:33"
-          },
-          {
-            "id": 44,
-            "menu_id": 37,
-            "type": 1,
-            "label": "素材管理",
-            "name": "materials",
-
-            "icon": "user",
-
-            "sort": 0,
-            "editable": true,
-            "created_at": "2021-12-06 11:33:33",
-            "updated_at": "2021-12-06 11:33:33"
+            "label": "500",
+            "key": "error500",
+            "icon": "icon_privacy_closed",
+            "sort": 4568,
+            "editable": true
           }
         ]
       },
       {
-        "id": 45,
-        "menu_id": 0,
+        "id": 4,
+        "menu_id": "",
         "type": 1,
-        "label": "系统设置",
-        "name": "setTag",
-
-        "icon": "user",
-
-        "sort": 7,
+        "label": "统计",
+        "key": "statistics",
+        "icon": "icon_MTR",
+        "sort": 5,
         "editable": true,
-        "created_at": "2021-12-06 11:33:40",
-        "updated_at": "2021-12-06 11:33:40",
-        "menus": [
+        "children": [
           {
-            "id": 47,
-            "menu_id": 45,
+            "id": 40,
+            "menu_id": 4,
+            "path": "/statistics/feedback",
             "type": 1,
-            "label": "管理员",
-            "name": "rightsProfile",
-
-            "icon": "user",
-
-            "sort": 4,
-            "editable": false,
-            "created_at": "2021-12-06 11:33:40",
-            "updated_at": "2021-12-06 11:33:40"
+            "label": "反馈统计",
+            "key": "feedback",
+            "icon": "icon_feeding",
+            "sort": 1,
+            "editable": true
           },
           {
-            "id": 46,
-            "menu_id": 45,
+            "id": 48,
+            "menu_id": 4,
+            "path": "/statistics/visitor",
             "type": 1,
-            "label": "管理员组",
-            "name": "roleManagement",
-
-            "icon": 'user',
-
-            "sort": 3,
-            "editable": false,
-            "created_at": "2021-12-06 11:33:40",
-            "updated_at": "2021-12-06 11:33:40"
-          },
-          {
-            "id": 49,
-            "menu_id": 45,
-            "type": 1,
-            "label": "店铺管理",
-            "name": "storeManagement",
-
-            "icon": 'user',
-
-            "sort": 2,
-            "editable": false,
-            "created_at": "2021-12-06 11:41:05",
-            "updated_at": "2021-12-06 11:52:09"
+            "label": "访客统计",
+            "key": "visitor",
+            "icon": "icon_addresslist",
+            "sort": 1,
+            "editable": true
           }
         ]
+      },
+      {
+        "id": 5,
+        "menu_id": "",
+        "type": 1,
+        "label": "系统设置",
+        "key": "power",
+        "icon": "icon_set",
+        "sort": 9,
+        "editable": true,
+        "children": [
+          {
+            "id": 53,
+            "menu_id": 5,
+            "type": 1,
+            "label": "菜单管理123546",
+            "key": "powerMenu",
+            "path": "/set/menu",
+            "icon": "icon_menu",
+            "sort": 1475,
+            "editable": true
+          },
+          {
+            "id": 55,
+            "menu_id": 5,
+            "type": 1,
+            "label": "用户管理",
+            "key": "powerUser",
+            "path": "/power/menu",
+            "icon": "icon_infopersonal",
+            "sort": 1593,
+            "editable": true
+          },
+          {
+            "id": 555,
+            "menu_id": 5,
+            "path": "/list/card",
+            "type": 1,
+            "label": "卡片列表",
+            "key": "listCard",
+            "icon": "",
+            "sort": 5485,
+            "editable": true,
+            "children": [
+              {
+                "id": 55555,
+                "menu_id": 555,
+                "path": "/power/type",
+                "type": 1,
+                "label": "权限管理",
+                "key": "powerType",
+                "icon": "icon_setting",
+                "sort": 9999,
+                "editable": true
+              }
+            ]
+          },
+          {
+            "id": 5555,
+            "menu_id": 5,
+            "path": "/list/search",
+            "type": 1,
+            "label": "查询列表",
+            "key": "listSearch",
+            "icon": "",
+            "sort": 9588,
+            "editable": true
+          }
+        ]
+      },
+      {
+        "id": 6,
+        "menu_id": "",
+        "path": "/icons",
+        "type": 1,
+        "label": "本地图标666",
+        "key": "icons",
+        "icon": "icon_pen",
+        "sort": 9999,
+        "editable": true
       }
     ],
     "links": {
@@ -331,7 +254,7 @@ async function getMenuList() {
   return await delay(data)
 }
 async function getMenu() {
-  return await delay([{ "menu_id": 3, "title": "403", "path": "/403", "key": "error403", "parentKey": "result", "icon": "icon_locking", "keepAlive": "false", "order": 0 }, { "menu_id": 4, "title": "404", "path": "/404", "key": "error404", "parentKey": "result", "icon": "icon_close", "keepAlive": "false", "order": 1 }, { "menu_id": 30, "title": "反馈统计", "path": "/feedback", "key": "feedback", "parentKey": "statistics", "icon": "icon_feeding", "keepAlive": "true", "order": 1 }, { "menu_id": 18, "title": "访客统计", "path": "/visitor", "key": "visitor", "parentKey": "statistics", "icon": "icon_addresslist", "keepAlive": "true", "order": 1 }, { "menu_id": 299, "title": "个人中心", "path": "/person", "key": "detailsPerson", "parentKey": "details", "icon": "icon_github", "keepAlive": "true", "order": 1 }, { "menu_id": 7, "title": "表单页", "path": "/form", "key": "from", "parentKey": "", "icon": "icon_form", "keepAlive": "false", "order": 3 }, { "menu_id": 1, "title": "详情页", "path": "/details", "key": "details", "parentKey": "", "icon": "icon_edit", "keepAlive": "false", "order": 3 }, { "menu_id": 16, "title": "结果页", "path": "/result", "key": "result", "parentKey": "", "icon": "icon_voiceprint", "keepAlive": "false", "order": 4 }, { "menu_id": 17, "title": "统计", "path": "/statistics", "key": "statistics", "parentKey": "", "icon": "icon_MTR", "keepAlive": "true", "order": 5 }, { "menu_id": 12, "title": "系统设置", "path": "/power", "key": "power", "parentKey": "", "icon": "icon_set", "keepAlive": "false", "order": 9 }, { "menu_id": 13, "title": "菜单管理", "path": "/menu", "key": "powerMenu", "parentKey": "power", "icon": "icon_menu", "keepAlive": "true", "order": 1475 }, { "menu_id": 15, "title": "用户管理", "path": "/user", "key": "powerUser", "parentKey": "power", "icon": "icon_infopersonal", "keepAlive": "true", "order": 1593 }, { "menu_id": 5, "title": "500", "path": "/500", "key": "error500", "parentKey": "result", "icon": "icon_privacy_closed", "keepAlive": "false", "order": 4568 }, { "menu_id": 10, "title": "卡片列表", "path": "/card", "key": "listCard", "parentKey": "list", "icon": "", "keepAlive": "false", "order": 5485 }, { "menu_id": 11, "title": "查询列表", "path": "/search", "key": "listSearch", "parentKey": "list", "icon": "", "keepAlive": "false", "order": 9588 }, { "menu_id": 6, "title": "基础表单", "path": "/index", "key": "formIndex", "parentKey": "from", "icon": "", "keepAlive": "false", "order": 9654 }, { "menu_id": 77, "title": "本地图标", "path": "/icons", "key": "icons", "parentKey": "", "icon": "icon_pen", "keepAlive": "true", "order": 9999 }, { "menu_id": 78, "title": "权限管理", "path": "/type", "key": "powerType", "parentKey": "power", "icon": "icon_setting", "keepAlive": "true", "order": 9999 }])
+  return await delay([])
 }
 
 async function login() {
@@ -353,189 +276,7 @@ async function login() {
   })
 }
 
-
-let menu: MenuList = [
-  {
-    menu_id: 9,
-    title: "列表页",
-    path: "/list",
-    key: "list",
-    parentKey: "",
-    icon: "icon_list",
-    keepAlive: "false",
-    order: 1,
-  },
-  {
-    menu_id: 10,
-    title: "卡片列表",
-    path: "/card",
-    key: "listCard",
-    parentKey: "list",
-    icon: "",
-    keepAlive: "false",
-    order: 5485,
-  },
-  {
-    menu_id: 11,
-    title: "查询列表",
-    path: "/search",
-    key: "listSearch",
-    parentKey: "list",
-    icon: "",
-    keepAlive: "false",
-    order: 9588,
-  },
-  {
-    menu_id: 7,
-    title: "表单页",
-    path: "/form",
-    key: "from",
-    parentKey: "",
-    icon: "icon_form",
-    keepAlive: "false",
-    order: 3,
-  },
-  {
-    menu_id: 6,
-    title: "基础表单",
-    path: "/index",
-    key: "formIndex",
-    parentKey: "from",
-    icon: "",
-    keepAlive: "false",
-    order: 9654,
-  },
-  {
-    menu_id: 1,
-    title: "详情页",
-    path: "/details",
-    key: "details",
-    parentKey: "",
-    icon: "icon_edit",
-    keepAlive: "false",
-    order: 3,
-  },
-  {
-    menu_id: 2,
-    title: "个人中心",
-    path: "/person",
-    key: "detailsPerson",
-    parentKey: "details",
-    icon: "icon_infopersonal",
-    keepAlive: "false",
-    order: 9998,
-  },
-  {
-    menu_id: 16,
-    title: "结果页",
-    path: "/result",
-    key: "result",
-    parentKey: "",
-    icon: "icon_voiceprint",
-    keepAlive: "false",
-    order: 4,
-  },
-  {
-    menu_id: 3,
-    title: "403",
-    path: "/403",
-    key: "error403",
-    parentKey: "result",
-    icon: "icon_locking",
-    keepAlive: "false",
-    order: 0,
-  },
-  {
-    menu_id: 4,
-    title: "404",
-    path: "/404",
-    key: "error404",
-    parentKey: "result",
-    icon: "icon_close",
-    keepAlive: "false",
-    order: 1,
-  },
-  {
-    menu_id: 5,
-    title: "500",
-    path: "/500",
-    key: "error500",
-    parentKey: "result",
-    icon: "icon_privacy_closed",
-    keepAlive: "false",
-    order: 4568,
-  },
-  {
-    menu_id: 17,
-    title: "统计",
-    path: "/statistics",
-    key: "statistics",
-    parentKey: "",
-    icon: "icon_MTR",
-    keepAlive: "true",
-    order: 5,
-  },
-  {
-    menu_id: 18,
-    title: "访客统计",
-    path: "/visitor",
-    key: "visitor",
-    parentKey: "statistics",
-    icon: "icon_addresslist",
-    keepAlive: "true",
-    order: 1,
-  },
-  {
-    menu_id: 12,
-    title: "权限管理",
-    path: "/power",
-    key: "power",
-    parentKey: "",
-    icon: "icon_set",
-    keepAlive: "false",
-    order: 9,
-  },
-  {
-    menu_id: 14,
-    title: "权限类别",
-    path: "/type",
-    key: "powerType",
-    parentKey: "power",
-    icon: "icon_safety",
-    keepAlive: "true",
-    order: 12,
-  },
-  {
-    menu_id: 13,
-    title: "菜单管理",
-    path: "/menu",
-    key: "powerMenu",
-    parentKey: "power",
-    icon: "icon_menu",
-    keepAlive: "true",
-    order: 1475,
-  },
-  {
-    menu_id: 15,
-    title: "用户管理",
-    path: "/user",
-    key: "powerUser",
-    parentKey: "power",
-    icon: "icon_infopersonal",
-    keepAlive: "true",
-    order: 1593,
-  },
-  {
-    menu_id: 8,
-    title: "图标库",
-    path: "/icons",
-    key: "icons",
-    parentKey: "",
-    icon: "icon_pen",
-    keepAlive: "true",
-    order: 10,
-  },
-];
+let menu = []
 const typeList = [
   {
     type_id: 1,

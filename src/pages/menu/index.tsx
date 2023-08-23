@@ -18,8 +18,8 @@ function Menu() {
     },
     {
       title: 'key',
-      dataIndex: 'name',
-      key: 'name',
+      dataIndex: 'key',
+      key: 'key',
     },
     {
       title: '菜单图标',
@@ -99,7 +99,7 @@ function Menu() {
         fetch={fetch}
         request={getMenuList}
         tableProps={{
-          childrenColumnName: 'menus',
+          childrenColumnName: 'children',
         }}></PageTable>
 
       <MenuForm ref={menuFromRef} menus={resData} affirm={refTable}></MenuForm>

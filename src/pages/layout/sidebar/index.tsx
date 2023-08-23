@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom'
 import { Menu } from 'antd'
 import SvgIcon from '@/components/svgIcon'
 import type { MenuProps } from 'antd/es/menu'
+import { getCurrentPageMenuInfo } from '@/utils/menu'
 type AntdMenuItem = Required<MenuProps>['items'][number]
 
 const getItem = (
@@ -20,43 +21,20 @@ const getItem = (
     label,
   } as AntdMenuItem)
 
-const renderMenu = (item: MenuItem, path: string): AntdMenuItem => {
+const renderMenu = (item: MenuItem): AntdMenuItem => {
   if (!item.children) {
     return getItem(
-      <Link to={path + item.path}>{item.title}</Link>,
+      <Link to={item.path}>{item.label}</Link>,
       item.key,
       <SvgIcon name={item.icon} myClass="font-20 mx-2" />
     )
   }
   return getItem(
-    item.title,
+    item.label,
     item.key,
     <SvgIcon name={item.icon} myClass="font-20 mx-2" />,
-    item.children.map((i) => renderMenu(i, path + item.path))
+    item.children.map((i) => renderMenu(i))
   )
-}
-
-function convertPathToArray(path: string) {
-  // /xx1/xx2/xx3...  转化成 [xx1 , .. , xx1Xx2Xx3..]
-  const pathArray = path.split('/').filter((item) => item !== '')
-
-  function recursiveConvert(index: number): string[] {
-    if (index > pathArray.length) {
-      return []
-    }
-
-    const currentPath = pathArray
-      .slice(0, index)
-      .map((item: string, index) => {
-        return index > 0 ? item.charAt(0).toUpperCase() + item.slice(1) : item
-      })
-      .join('')
-
-    const restPaths = recursiveConvert(index + 1)
-    return [currentPath, ...restPaths]
-  }
-
-  return recursiveConvert(1)
 }
 
 const SidebarMenu = () => {
@@ -64,22 +42,25 @@ const SidebarMenu = () => {
   const collapsed = useStateCollapsed()
   const location = useLocation()
   const navigate = useNavigate()
-  const pathname = convertPathToArray(location.pathname)
-  // const openKeys = menuList.map(e => e.key)
-  const defaultSelectedKeys = pathname.splice(-1) // 初始选中的菜单项 key 数组
+  const pathname = getCurrentPageMenuInfo(menuList, location.pathname).map(e => e.key)
+  const defaultSelectedKeys = pathname.splice(0, 1) // 初始选中的菜单项 key 数组
   const [openKeys, setOpenKeys] = useState<string[]>(pathname) // 当前展开的 SubMenu 菜单项 key 数组
-  console.log(menuList, openKeys, defaultSelectedKeys)
+  console.log(defaultSelectedKeys, openKeys)
   // 打开父菜单
   function onOpenChange(keys: string[]) {
-    setOpenKeys(keys.length ? [keys[keys.length - 1]] : [])
+    // 只打开一个菜单 todo 多级菜单无法打开子集
+    // setOpenKeys(keys.length ? [keys[keys.length - 1]] : [])
+    setOpenKeys(keys)
   }
 
   // 菜单选项
-  const menuComponent = useMemo(() => menuList.map((m) => renderMenu(m, '')), [menuList])
+  const menuComponent = useMemo(() => menuList.map((m) => renderMenu(m)), [menuList])
   console.log(menuComponent, 666)
-  // 解决 折叠后一级菜单点击没有跳转
   function onClick(key: Record<string, any>) {
-    navigate('/' + key.keyPath.join('/'))
+    // 解决 折叠后一级菜单点击没有跳转
+    if (collapsed && key.keyPath.length === 1) {
+      navigate('/' + key.key)
+    }
   }
   return (
     <div>

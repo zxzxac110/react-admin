@@ -63,7 +63,6 @@ function PageForm(props: PageFormProps) {
     },
   ]
   function getFromValue() {
-    console.log(formRef.current?.getFieldsValue())
     return formRef.current?.getFieldsValue() || {}
   }
   const genFromElement = useCallback((e: PageFormColumn): ReactNode => {

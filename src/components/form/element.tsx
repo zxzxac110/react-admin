@@ -42,7 +42,6 @@ function genSelect(e: PageFormColumn): ReactNode {
 }
 
 function genRangePicker(e: PageFormColumn): ReactNode {
-  console.log(666)
   return (
     <DatePicker.RangePicker
       presets={rangePresets}

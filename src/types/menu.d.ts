@@ -25,17 +25,15 @@ declare interface MenuState {
 
 // 未处理的菜单列表信息
 declare interface MenuItem {
-  menu_id: number
-  icon: string
-  keepAlive: string
-  key: string | number
-  order?: number
-  parentKey: string
-  path: string // 路径    MENU_PATH
-  title: string
+  id: number, // 唯一
+  menu_id: number // 父级ID
+  icon: string // 图标
+  keepAlive: string | boolean // bool
+  key: string  // 唯一
+  sort: number // 排序
+  path: string // 路径
+  label: string
   children?: MenuList
-  parentPath?: string
-  isShowOnMenu?: boolean | string // 显示菜单MENU_SHOW
   [key: string]: any
 }
 
