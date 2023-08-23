@@ -82,7 +82,10 @@ const auto = [
     key: 'powerMenu',
     components: () => import('@/pages/menu'),
   },
-
+  {
+    key: 'setDome',
+    components: () => import('@/pages/dome'),
+  },
   {
     key: 'error500',
     components: () => import('@/pages/a1/500'),

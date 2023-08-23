@@ -29,6 +29,34 @@ export function getQuery() {
   return query
 }
 
+export function selectFormat(obj?: Record<string, Record<string, any>>): Record<string, Record<string, any>> {
+  if (!obj) {
+    return {}
+  }
+  const newObj: Record<string, any> = {}
+  for (const key in obj) {
+    const element = obj[key]
+    newObj[key] = []
+    if (Array.isArray(element)) {
+      element.forEach((e, i) => {
+        newObj[key].push({
+          value: i,
+          label: e
+        })
+      })
+    } else {
+      for (const value in element) {
+        newObj[key].push({
+          value: value,
+          label: element[value]
+        })
+      }
+    }
+  }
+  console.log(newObj)
+  return newObj
+}
+
 // function genFormElement() {
 //  />
 // }

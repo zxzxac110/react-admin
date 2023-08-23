@@ -1,7 +1,7 @@
 import dayjs from "dayjs";
 import { message } from "antd";
 import { formatMenu } from "@/utils";
-
+import { parse } from 'qs'
 type MockDataType = {
   "/getmenu": MenuResponse
   "/getpower": PowerApi
@@ -168,7 +168,18 @@ async function getMenuList() {
             "id": 53,
             "menu_id": 5,
             "type": 1,
-            "label": "菜单管理123546",
+            "label": "例子",
+            "key": "setDome",
+            "path": "/set/dome",
+            "icon": "icon_menu",
+            "sort": 1475,
+            "editable": true
+          },
+          {
+            "id": 53,
+            "menu_id": 5,
+            "type": 1,
+            "label": "菜单管理",
             "key": "powerMenu",
             "path": "/set/menu",
             "icon": "icon_menu",
@@ -249,6 +260,16 @@ async function getMenuList() {
       "per_page": 15,
       "to": 5,
       "total": 5
+    },
+    "maps": {
+      "types": [
+        "红色",
+        "蓝色"
+      ],
+      "mode": {
+        "qq": "QQ",
+        "weixin": "微信"
+      },
     }
   }
   return await delay(data)
@@ -375,8 +396,10 @@ const MockData: MockDataType = {
   "/getvisitordata": { status: 1, msg: "暂无" },
 };
 type UrlType = keyof MockDataType
-function get(url: UrlType) {
-  console.log('请求数据', url)
+function get(url: string) {
+  const arr = url.split('?')
+
+  console.log('请求数据', arr[0], parse(arr[1] || '{}'))
   if (url.indexOf('/menus') > -1) {
     return getMenuList()
   }

@@ -5,6 +5,7 @@ import GenFromElement from '@/components/form/element'
 interface PageFormProps {
   handleInstance: (form: FormInstance) => void
   columns: PageFormColumns
+  formItemProps?: Record<string, any>
   props?: Record<string, any>
 }
 
@@ -21,7 +22,7 @@ function PageForm(props: PageFormProps) {
     return (
       props.columns?.map((e: PageFormColumn) => {
         return (
-          <Form.Item label={e.label} name={e.name}>
+          <Form.Item label={e.label} name={e.name} {...e.formItemProps}>
             {GenFromElement(e)}
           </Form.Item>
         )

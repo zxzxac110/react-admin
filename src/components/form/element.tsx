@@ -1,28 +1,28 @@
-import { useEffect, useMemo, useCallback, ReactNode } from 'react'
-import { Form, Input, Select, DatePicker, InputNumber } from 'antd'
-import type { TimeRangePickerProps, FormInstance } from 'antd'
+import { ReactNode } from 'react'
+import { Input, Select, DatePicker, InputNumber } from 'antd'
+import { rangePresets } from '@/utils/time'
 import dayjs from 'dayjs'
 import 'dayjs/locale/zh-cn'
 
 dayjs.locale('zh-cn') // 日期国际化
 const format = 'YYYY/MM/DD HH:mm:ss'
 
-const rangePresets: TimeRangePickerProps['presets'] = [
-  { label: '今天', value: [dayjs().startOf('day'), dayjs().endOf('day')] },
-  {
-    label: '昨天',
-    value: [dayjs().add(-1, 'd').startOf('day'), dayjs().startOf('day')],
-  },
-  { label: '近七天', value: [dayjs().add(-7, 'd').startOf('day'), dayjs().startOf('day')] },
-  {
-    label: '最近一个月',
-    value: [dayjs().add(-1, 'month').startOf('day'), dayjs().startOf('day')],
-  },
-  {
-    label: '最近三个月',
-    value: [dayjs().add(-3, 'month').startOf('day'), dayjs().startOf('day')],
-  },
-]
+// export const rangePresets: TimeRangePickerProps['presets'] = [
+//   { label: '今天', value: [dayjs().startOf('day'), dayjs().endOf('day')] },
+//   {
+//     label: '昨天',
+//     value: [dayjs().add(-1, 'd').startOf('day'), dayjs().startOf('day')],
+//   },
+//   { label: '近七天', value: [dayjs().add(-7, 'd').startOf('day'), dayjs().startOf('day')] },
+//   {
+//     label: '最近一个月',
+//     value: [dayjs().add(-1, 'month').startOf('day'), dayjs().startOf('day')],
+//   },
+//   {
+//     label: '最近三个月',
+//     value: [dayjs().add(-3, 'month').startOf('day'), dayjs().startOf('day')],
+//   },
+// ]
 
 function genInputNumber(e: PageFormColumn): ReactNode {
   return <InputNumber {...e.props}></InputNumber>
@@ -51,6 +51,7 @@ function genRangePicker(e: PageFormColumn): ReactNode {
       }}
       placeholder={(e.placeholder as [string, string]) || ['开始时间', '结束时间']}
       format={format}
+      {...e.props}
     />
   )
 }

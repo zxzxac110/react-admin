@@ -22,6 +22,11 @@ function Menu() {
       key: 'key',
     },
     {
+      title: '访问路径',
+      dataIndex: 'path',
+      key: 'path',
+    },
+    {
       title: '菜单图标',
       dataIndex: 'icon',
       key: 'icon',
