@@ -98,18 +98,11 @@ npm install @loadable/component -D 动态加载
 
 ### todo
 
-主题
-
-keepAlive
-
-content
-
-适配 V6
-
+左侧菜单和菜单列表共用菜单
 一个列子页面
-
-管理员
-
 权限
-
+登录页
+适配 V6
 axios 配置
+keepAlive
+打包测试

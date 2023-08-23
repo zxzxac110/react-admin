@@ -24,7 +24,7 @@ const LayoutContainer = () => {
             overflow: 'hidden',
           }}>
           <Header></Header>
-          <div className="content-box">
+          <div className="content-box color-bg-layout">
             <Crumbs></Crumbs>
             <Outlet></Outlet>
           </div>

@@ -34,7 +34,7 @@ async function getMenuList() {
         "label": "用户运营",
         "name": "userManage",
 
-        "icon": "",
+        "icon": "user",
 
         "sort": 0,
         "editable": true,
@@ -48,7 +48,7 @@ async function getMenuList() {
             "label": "用户管理",
             "name": "userManage",
 
-            "icon": "user-linear",
+            "icon": "user",
 
             "sort": 0,
             "editable": true,
@@ -62,7 +62,7 @@ async function getMenuList() {
             "label": "会员管理",
             "name": "vip",
 
-            "icon": "vip",
+            "icon": "user",
 
             "sort": 0,
             "editable": true,
@@ -78,7 +78,7 @@ async function getMenuList() {
         "label": "个人号运营",
         "name": "userManage",
 
-        "icon": "",
+        "icon": "user",
 
         "sort": 0,
         "editable": true,
@@ -92,7 +92,7 @@ async function getMenuList() {
             "label": "个人号管理",
             "name": "personageManage",
 
-            "icon": "personage-manage",
+            "icon": "user",
 
             "sort": 0,
             "editable": true,
@@ -119,7 +119,7 @@ async function getMenuList() {
             "label": "社群管理",
             "name": "communityManagement",
 
-            "icon": "ic_sq",
+            "icon": "user",
 
             "sort": 0,
             "editable": true,
@@ -133,7 +133,7 @@ async function getMenuList() {
             "label": "群发管理",
             "name": "chatMessageTasksGroup",
 
-            "icon": "ic_qf",
+            "icon": "user",
 
             "sort": 0,
             "editable": true,
@@ -147,7 +147,7 @@ async function getMenuList() {
             "label": "社群设置",
             "name": "groupAnnouncement",
 
-            "icon": "ic_qsz",
+            "icon": "user",
 
             "sort": 0,
             "editable": true,
@@ -174,7 +174,7 @@ async function getMenuList() {
             "label": "售后管理",
             "name": "afterSale",
 
-            "icon": "ic_sh_gray",
+            "icon": "user",
 
             "sort": 4,
             "editable": true,
@@ -188,7 +188,7 @@ async function getMenuList() {
             "label": "订单管理",
             "name": "orderManage",
 
-            "icon": "ic_dd_gray",
+            "icon": "user",
 
             "sort": 3,
             "editable": true,
@@ -202,7 +202,7 @@ async function getMenuList() {
             "label": "商品管理",
             "name": "shop",
 
-            "icon": "ic_sp_gray",
+            "icon": "user",
 
             "sort": 2,
             "editable": true,
@@ -216,7 +216,7 @@ async function getMenuList() {
             "label": "模板页",
             "name": "template",
 
-            "icon": "mb",
+            "icon": "user",
 
             "sort": 1,
             "editable": true,
@@ -230,7 +230,7 @@ async function getMenuList() {
             "label": "分组管理",
             "name": "groupManage",
 
-            "icon": "tabs",
+            "icon": "user",
 
             "sort": 0,
             "editable": true,
@@ -244,7 +244,7 @@ async function getMenuList() {
             "label": "素材管理",
             "name": "materials",
 
-            "icon": "material",
+            "icon": "user",
 
             "sort": 0,
             "editable": true,
@@ -260,7 +260,7 @@ async function getMenuList() {
         "label": "系统设置",
         "name": "setTag",
 
-        "icon": "set",
+        "icon": "user",
 
         "sort": 7,
         "editable": true,
@@ -274,7 +274,7 @@ async function getMenuList() {
             "label": "管理员",
             "name": "rightsProfile",
 
-            "icon": null,
+            "icon": "user",
 
             "sort": 4,
             "editable": false,
@@ -288,7 +288,7 @@ async function getMenuList() {
             "label": "管理员组",
             "name": "roleManagement",
 
-            "icon": null,
+            "icon": 'user',
 
             "sort": 3,
             "editable": false,
@@ -302,7 +302,7 @@ async function getMenuList() {
             "label": "店铺管理",
             "name": "storeManagement",
 
-            "icon": null,
+            "icon": 'user',
 
             "sort": 2,
             "editable": false,

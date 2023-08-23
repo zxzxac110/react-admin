@@ -1,4 +1,8 @@
 // defaultTheme' | 'darkTheme'
+
+* {
+  transition: background 0.3s, border 0.3s;
+}
 .app {
   background: var(--color-bg-container);
   color: var(--color-text);
@@ -17,4 +21,16 @@
 }
 .secondary-border-left {
   border-left: 1px solid var(--color-border-secondary);
+}
+
+.color-bg-layout {
+  background: var(--color-bg-layout);
+}
+
+.page-box {
+  background: var(--color-bg-container);
+}
+
+.page-table .ant-table-container {
+  border: 1px solid var(--color-border-secondary);
 }

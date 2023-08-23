@@ -76,13 +76,14 @@ const SidebarMenu = () => {
 
   // 菜单选项
   const menuComponent = useMemo(() => menuList.map((m) => renderMenu(m, '')), [menuList])
+  console.log(menuComponent, 666)
   // 解决 折叠后一级菜单点击没有跳转
   function onClick(key: Record<string, any>) {
     navigate('/' + key.keyPath.join('/'))
   }
   return (
     <div>
-      <div className="layout-sidebar-menu">
+      <div className="layout-sidebar-menu secondary-border-right">
         <Menu
           mode="inline"
           // triggerSubMenuAction="click"
