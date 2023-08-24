@@ -7,3 +7,9 @@ declare type TableParams = {
   field?: string
 }
 
+
+
+declare type TableMap = Record<string | number, string> | string[]
+
+declare type TableMaps = Record<string, TableMap> | null
+

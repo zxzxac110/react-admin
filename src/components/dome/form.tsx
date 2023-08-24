@@ -5,9 +5,11 @@ import SvgDialog from '@/components/svgIcon/dialog'
 import SvgIcon from '@/components/svgIcon/index'
 import { Modal, message, FormInstance } from 'antd'
 import { addMenu, editMenu } from '@/api'
+import { timeFormatTransferDayjs, formatDayjs } from '@/utils/time'
 interface MenuFormProps {
   menus: Record<string, any>[]
   affirm: () => void
+  maps?: SelectMaps
 }
 const titleType: Record<string, any> = {
   add: '新增菜单',
@@ -35,6 +37,13 @@ const MenuModal = forwardRef((props: MenuFormProps, ref) => {
         props: {
           disabled: initialValue.id && !initialValue.menu_id,
         },
+      },
+      {
+        label: '类型',
+        name: 'type',
+        placeholder: '请选择',
+        type: 'Select',
+        options: props.maps?.types,
       },
       {
         label: '菜单标题',
@@ -65,6 +74,13 @@ const MenuModal = forwardRef((props: MenuFormProps, ref) => {
         type: 'InputNumber',
       },
       {
+        label: '创建时间',
+        name: 'create_time',
+        placeholder: ['开始时间', '结束时间'],
+        type: 'RangePicker',
+        style: { width: '350px' },
+      },
+      {
         label: '图标',
         name: 'icon',
         type: 'children',
@@ -82,7 +98,7 @@ const MenuModal = forwardRef((props: MenuFormProps, ref) => {
         ),
       },
     ]
-  }, [props.menus, initialValue, type])
+  }, [props.menus, initialValue, type, props.maps])
 
   // 打开icon弹窗
   const svgDialogRef = useRef<ComponentInstance>()
@@ -101,7 +117,18 @@ const MenuModal = forwardRef((props: MenuFormProps, ref) => {
     formRef && formRef.resetFields()
     let data = {}
     if (type === 'edit') {
-      data = row
+      data = {
+        ...row,
+        type: row.type + '',
+        ...(row.create_time
+          ? {
+              create_time: [
+                timeFormatTransferDayjs(row.create_time),
+                timeFormatTransferDayjs(row.create_time.slice(0, -1) + '9'),
+              ],
+            }
+          : { create_time: [] }),
+      }
     } else if (type === 'addChild') {
       data = { menu_id: row.id }
     }
@@ -117,6 +144,8 @@ const MenuModal = forwardRef((props: MenuFormProps, ref) => {
         const data = {
           ...values, // 表单数据
           ...initialValue, // 非表单数据
+          a: formatDayjs(values.create_time?.[0]),
+          b: formatDayjs(values.create_time?.[1]),
         }
         setLoading(true)
         if (initialValue.id) {

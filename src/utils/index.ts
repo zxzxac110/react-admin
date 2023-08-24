@@ -29,7 +29,7 @@ export function getQuery() {
   return query
 }
 
-export function selectFormat(obj?: Record<string, Record<string, any>>): Record<string, Record<string, any>> {
+export function selectFormat(obj?: TableMaps): SelectMaps {
   if (!obj) {
     return {}
   }
@@ -40,20 +40,19 @@ export function selectFormat(obj?: Record<string, Record<string, any>>): Record<
     if (Array.isArray(element)) {
       element.forEach((e, i) => {
         newObj[key].push({
-          value: i,
+          value: i + '',
           label: e
         })
       })
     } else {
       for (const value in element) {
         newObj[key].push({
-          value: value,
+          value: value + '',
           label: element[value]
         })
       }
     }
   }
-  console.log(newObj)
   return newObj
 }
 

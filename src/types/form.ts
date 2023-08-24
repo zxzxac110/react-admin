@@ -19,6 +19,13 @@ declare type FormDialog = {
   open: (v?: Record<string, any>, type?: FromDialogType) => void
 }
 
+declare type SelectMaps = {
+  [key: string]: {
+    value: string,
+    label: string,
+  }[]
+} | null
+
 declare type FromDialogType = 'add' | 'edit' | 'look' | string
 declare type BtnsProps = BtnProps[]
 declare type PageFormColumns = PageFormColumn[]

@@ -1,5 +1,5 @@
 import { Table } from 'antd'
-import type { TablePaginationConfig, SorterResult, FilterValue } from 'antd'
+import type { TablePaginationConfig } from 'antd'
 import { useState, useEffect, forwardRef, useImperativeHandle } from 'react'
 interface PageTableProps {
   query?: Record<string, any> // 外部请求参数

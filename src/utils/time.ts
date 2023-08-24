@@ -21,7 +21,16 @@ export const rangePresets: TimeRangePickerProps['presets'] = [
   },
 ]
 
+// 'YYYY/MM/DD HH:mm:ss'转dayjs
+export function timeFormatTransferDayjs(time: string) {
+  return dayjs(new Date(time))
+}
+
+// dayjs转'YYYY/MM/DD HH:mm:ss'
 export function formatDayjs(time: Dayjs, str?: string) {
+  if (!time) {
+    return ''
+  }
   if (time) {
     return dayjs(time).format(str || format)
   } else {

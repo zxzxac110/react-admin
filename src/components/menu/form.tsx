@@ -8,6 +8,7 @@ import { addMenu, editMenu } from '@/api'
 interface MenuFormProps {
   menus: Record<string, any>[]
   affirm: () => void
+  maps?: SelectMaps
 }
 const titleType: Record<string, any> = {
   add: '新增菜单',
