@@ -98,8 +98,6 @@ npm install @loadable/component -D 动态加载
 
 ### todo
 
-权限
-
 登录页
 
 适配 V6

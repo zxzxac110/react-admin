@@ -1,13 +1,13 @@
 import { Button, Popconfirm, message } from 'antd'
 import { useMemo, useRef, useState } from 'react'
-import { getMenuList, delMenu } from '@/api/index'
+import { getAdminGroup, delAdminGroup } from '@/api/index'
 import PageForm from '@/components/pageForm'
 import PageTable from '@/components/pageTable'
-import DomeForm from '@/components/dome/form'
+import RoleForm from '@/components/role/form'
 import SvgIcon from '@/components/svgIcon'
 import { selectFormat } from '@/utils/index'
 interface RoleForm {
-  username: string
+  name: string
   [key: string]: any
 }
 
@@ -20,7 +20,7 @@ function Role() {
 
   // 表单初始值 | 提交值
   const [formData, setFormDate] = useState<RoleForm>({
-    username: '',
+    name: '',
   })
 
   // 表单内部dom元素
@@ -51,8 +51,8 @@ function Role() {
       },
       {
         title: '创建时间',
-        dataIndex: 'create_time',
-        key: 'create_time',
+        dataIndex: 'created_at',
+        key: 'created_at',
         render: (value: string) => <div>{value}</div>,
       },
       {
@@ -96,8 +96,8 @@ function Role() {
   function fetch(data: Record<string, any>) {
     console.log(data, '列表返回数据')
     setResData(data.data)
-    setMaps(data.maps) // types // mode
-    setSelectMaps(selectFormat(data.maps)) // types // mode
+    setMaps(data.maps)
+    setSelectMaps(selectFormat(data.maps))
   }
   // 打开编辑新增弹窗
   function open(row: Record<string, any>, type?: FromDialogType) {
@@ -107,7 +107,7 @@ function Role() {
   // 删除
   async function del(row: Record<string, any>) {
     try {
-      await delMenu(row.id)
+      await delAdminGroup(row.id)
       message.success('删除成功')
       refTable()
       return Promise.resolve()
@@ -129,12 +129,12 @@ function Role() {
         query={formData}
         columns={columns}
         fetch={fetch}
-        request={getMenuList}
+        request={getAdminGroup}
         tableProps={{
           childrenColumnName: 'none',
         }}></PageTable>
 
-      <DomeForm ref={dialog} menus={resData} affirm={refTable} maps={selectMaps}></DomeForm>
+      <RoleForm ref={dialog} affirm={refTable} maps={selectMaps}></RoleForm>
     </>
   )
 }

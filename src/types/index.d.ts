@@ -1,6 +1,6 @@
 declare type Theme = 'defaultTheme' | 'darkTheme'
 declare type AppState = {
-  theme:Theme
+  theme: Theme
 }
 declare interface AppAction extends AppState {
   type: string;
@@ -43,3 +43,7 @@ declare interface ComponentInstance {
   [key: string]: any
 }
 
+declare interface Option {
+  value: string | number
+  label: string
+}
