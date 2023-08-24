@@ -35,8 +35,8 @@ const asyncRouter: RouterInfo[] = []
 // 异步路由处理前格式
 const auto = [
   {
-    key: 'powerUser',
-    components: () => import('@/pages/a1/user'),
+    key: 'role',
+    components: () => import('@/pages/role'),
   },
   {
     key: 'error403',
@@ -61,10 +61,6 @@ const auto = [
   {
     key: 'details',
     components: () => import('@/pages/a1/details'),
-  },
-  {
-    key: 'from',
-    components: () => import('@/pages/a1/form'),
   },
   {
     key: 'result',
@@ -93,14 +89,6 @@ const auto = [
   {
     key: 'listCard',
     components: () => import('@/pages/a1/card'),
-  },
-  {
-    key: 'listSearch',
-    components: () => import('@/pages/a1/search'),
-  },
-  {
-    key: 'formIndex',
-    components: () => import('@/pages/a1/index'),
   },
   {
     key: 'icons',

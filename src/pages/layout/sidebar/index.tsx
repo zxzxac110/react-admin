@@ -45,7 +45,6 @@ const SidebarMenu = () => {
   const pathname = getCurrentPageMenuInfo(menuList, location.pathname).map(e => e.key)
   const defaultSelectedKeys = pathname.splice(0, 1) // 初始选中的菜单项 key 数组
   const [openKeys, setOpenKeys] = useState<string[]>(pathname) // 当前展开的 SubMenu 菜单项 key 数组
-  console.log(defaultSelectedKeys, openKeys)
   // 打开父菜单
   function onOpenChange(keys: string[]) {
     // 只打开一个菜单 todo 多级菜单无法打开子集
@@ -55,7 +54,7 @@ const SidebarMenu = () => {
 
   // 菜单选项
   const menuComponent = useMemo(() => menuList.map((m) => renderMenu(m)), [menuList])
-  console.log(menuComponent, 666)
+
   function onClick(key: Record<string, any>) {
     // 解决 折叠后一级菜单点击没有跳转
     if (collapsed && key.keyPath.length === 1) {

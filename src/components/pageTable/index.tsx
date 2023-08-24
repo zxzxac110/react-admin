@@ -71,7 +71,6 @@ const PageTable = forwardRef((props: PageTableProps, ref) => {
           columns={props.columns}
           dataSource={data}
           sticky
-          {...props.tableProps}
           pagination={{
             total: total,
             pageSize: tableParams.pageSize,
@@ -80,9 +79,7 @@ const PageTable = forwardRef((props: PageTableProps, ref) => {
             showQuickJumper: true,
             showTotal: (total) => `共${total}条`,
           }}
-          expandable={{
-            defaultExpandAllRows: true,
-          }}
+          {...props.tableProps}
         />
       </div>
     </div>

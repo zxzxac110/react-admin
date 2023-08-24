@@ -1,5 +1,3 @@
-import { getMenu } from "@/api";
-
 export const USER_INFO = "USER_INFO"; // 用户信息
 export const TOKEN = "REACT_ADMIN_TOKEN"; // token
 export const MENU = "MENU"; // 菜单
@@ -127,69 +125,6 @@ export function layout() {
 /**
  * 获取菜单
  */
-function getLocalMenu(): MenuResponse | null {
-  return getKey(false, MENU);
-}
-
-function saveLocalMenu(list: MenuResponse) {
-  setKey(false, MENU, list);
-}
-export async function getMenus() {
-  let localMenu = getLocalMenu();
-  if (localMenu) { return localMenu }
-  localMenu = await getMenu()
-  saveLocalMenu(localMenu);
-  return localMenu
-}
-
-/**
- * 菜单格式化处理,将后台传递的一维数组改成树形结构
- * @param list 
- * @returns 
- */
-export function formatMenu(list: MenuList) {
-  const newList = list.map(item => ({ ...item }))
-  const menuMap: MenuMap = {};
-  const parentMenu: MenuList = [];
-  newList.forEach((item) => {
-    // 当前 菜单的key
-    const currentKey = item.key;
-    // 当前 菜单的父菜单key
-    const currentParentKey = item.parentKey;
-    // 如果 映射表还没有值 就把当前项 赋值进去
-    if (!menuMap[currentKey]) {
-      menuMap[currentKey] = item;
-    } else {
-      // 有值 说明 有子项 保留子项 把当前值 赋值进去
-      item.children = menuMap[currentKey].children;
-      menuMap[currentKey] = item;
-    }
-    // 如果当前项 有父级
-    if (currentParentKey) {
-      // 父级还没有在映射表上
-      if (!menuMap[currentParentKey]) {
-        // 那就把映射上去 只有子集属性<Array>类型
-        menuMap[currentParentKey] = {
-          children: [item],
-        };
-      } else if (
-        menuMap[currentParentKey] &&
-        !menuMap[currentParentKey].children
-      ) {
-        // 父级在映射表上 不过 没子集
-        menuMap[currentParentKey].children = [item];
-      } else {
-        // 父级有 子集合也有
-        menuMap[currentParentKey].children?.push(item);
-      }
-    } else {
-      // 当前项是没有父级 那当前项就是父级项
-      parentMenu.push(item);
-    }
-  });
-  return parentMenu;
-}
-
 export function reduceMenuList(list: MenuList, path: string = ''): MenuList {
   const data: MenuList = [];
   list.forEach((i) => {
@@ -204,15 +139,3 @@ export function reduceMenuList(list: MenuList, path: string = ''): MenuList {
   return data;
 }
 
-
-export function getMenuParentKey(list: MenuList, key: string): string[] {
-  const keys = [];
-  const info = list.find((item) => item[MENU_KEY] === key);
-  const parentKey = info?.[MENU_PARENTKEY];
-  if (parentKey) {
-    const data = getMenuParentKey(list, parentKey)
-    keys.push(...data);
-    keys.push(parentKey);
-  }
-  return keys;
-}

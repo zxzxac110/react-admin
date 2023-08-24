@@ -105,6 +105,10 @@ function Menu() {
         request={getMenuList}
         tableProps={{
           childrenColumnName: 'children',
+          defaultExpandAllRows: true,
+          expandable: {
+            defaultExpandedRowKeys: [1, 2, 3, 4, 5, 6, 7, 8],
+          },
         }}></PageTable>
 
       <MenuForm ref={menuFromRef} menus={resData} affirm={refTable}></MenuForm>
