@@ -66,6 +66,9 @@ export function genRouterList(mergeRouterList: any[]): RouterInfo[] {
     // 匹配成功的路由
     const matchRouter = generateRoutes(mergeRouterList, [])
     return matchRouter.concat(localRouter.constRouter)
+  } else {
+    // 没有菜单吐出常用路由
+    return localRouter.constRouter
   }
   return []
 }
