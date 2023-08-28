@@ -1,5 +1,6 @@
 // 获取菜单 生成路由
 import { useEffect, useState } from 'react'
+import { Spin } from 'antd'
 import { Routes, Route, Navigate } from 'react-router-dom'
 import Intercept from './intercept'
 import { genRouterList, createMenuTree, getRedirect } from '@/utils/route'
@@ -8,10 +9,10 @@ import { useDispatchMenu } from '@/store/hooks'
 import Layout from '@/pages/layout'
 
 const Router = () => {
-  console.log('RouterRouter')
+  console.log('Router')
   const { stateSetMenuList } = useDispatchMenu() // 设置右侧菜单
   const [mergeRouterList, setMergeList] = useState<React.ReactElement[]>([]) // 即将生成的路由列表
-
+  const [loading, setLoad] = useState(true)
   // 监听 菜单变化  路由跟着变化
   useEffect(() => {
     if (stateSetMenuList && typeof stateSetMenuList === 'function') {
@@ -22,6 +23,7 @@ const Router = () => {
           // const formatList = createMenuTree(e.data) // 一维转树形
           const formatList = e.data
           stateSetMenuList(formatList)
+          setLoad(false)
         })
         .catch((e) => {
           console.log(e)
@@ -33,7 +35,7 @@ const Router = () => {
   const genRouter = (mergeRouterList: any[]): React.ReactElement[] => {
     // if (mergeRouterList.length) {
     const routerList = genRouterList(mergeRouterList) // 即将渲染路由的list
-    console.log(routerList)
+    console.log('路由的list',routerList)
     const redirect = getRedirect(routerList) // 重定向，取匹配成功的第一个
 
     const arr: Record<string, any[]> = {
@@ -59,7 +61,13 @@ const Router = () => {
     // }
     return []
   }
-
+  if (loading) {
+    return (
+      <Spin size="large" tip="Loading...">
+        <div className="app" />
+      </Spin>
+    )
+  }
   return <Routes>{mergeRouterList}</Routes>
 }
 

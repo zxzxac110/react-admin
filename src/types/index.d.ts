@@ -8,11 +8,13 @@ declare interface AppAction extends AppState {
 
 // 用户信息
 declare type UserInfo = {
+  id: number
   account: string
-  type: string
-  user_id: number
-  username: string
-  isLogin?: boolean
+  type?: string
+  username?: string
+  name?: string
+  avatar?: string
+  mobile?: string,
 } | null
 
 declare type UserAction = {

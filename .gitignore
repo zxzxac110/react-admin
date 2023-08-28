@@ -11,6 +11,9 @@ node_modules
 dist
 dist-ssr
 *.local
+test
+dist_dev
+dist_mock
 
 # Editor directories and files
 .vscode/*

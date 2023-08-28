@@ -1,66 +1,25 @@
 // 路由拦截
-import { useCallback, useEffect, useMemo, useState } from 'react'
-import Error from '@/pages/error'
-import { useLocation } from 'react-router-dom'
-
-const scrollPage = () => {
-  window.scrollTo({
-    top: 0,
-    left: 0,
-    behavior: 'smooth',
-  })
-}
+import { useEffect } from 'react'
 
 interface Props {
-  path?: string
-  title?: string
-  pageKey: string
+  label?: string
   [key: string]: any
 }
 
 // 路由拦截
-// 菜单 组件 标题 路径 key
-function Intercept({ components, title, path: pagePath, pageKey }: Props) {
-  const [pageInit, setPageInit] = useState(false)
-  const location = useLocation()
-  // const {  stateAddOpenedMenu, stateSetCurrentPath } = useDispatchMenu()
-  const currentPath = useMemo(() => {
-    const { pathname, search } = location
-    return pathname + search
-  }, [location])
-  // 监听 location 改变
-  const onPathChange = useCallback(() => {
-    console.log('监听 location 改变', title)
-    // stateSetCurrentPath(currentPath)
-    // stateAddOpenedMenu({ key: pageKey, path: currentPath, title: title || "未设置标题信息" });
-  }, [title])
-
-  const setCurrentPageInfo = useCallback(() => {
-    if (!title) {
+//  组件 标题
+function Intercept({ components, label }: Props) {
+  useEffect(() => {
+    console.log('路由改变', label)
+    if (!label) {
       return
     }
-    document.title = title
-    // stateSetSelectMenuKey([String(pageKey)])
-    // stateAddOpenedMenu({ key: pageKey, path: currentPath, title })
-  }, [title])
-
-  const init = useCallback(() => {
-    setCurrentPageInfo()
-    scrollPage()
-  }, [setCurrentPageInfo])
-
-  useEffect(() => {
-    if (init && !pageInit) {
-      init()
-      setPageInit(true)
-    }
-  }, [init, pageInit])
-
-  useEffect(() => {
-    if (pageInit) {
-      onPathChange()
-    }
-  }, [onPathChange, pageInit])
+    document.title = label
+    // if (!pageInit) {
+    // setCurrentPageInfo()
+    // setPageInit(true)
+    // }
+  }, [])
 
   return components
 }

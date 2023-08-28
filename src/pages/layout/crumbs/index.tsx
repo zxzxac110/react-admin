@@ -8,7 +8,7 @@ function Crumbs() {
   const menu = useStateMenuList()
   const location = useLocation()
   const breadcrumbItems = useMemo(() => {
-    const arr = getCurrentPageMenuInfo(menu, location.pathname)
+    const arr = getCurrentPageMenuInfo(menu, location.pathname).reverse()
     return arr.map((e) => {
       return {
         title: e.label,

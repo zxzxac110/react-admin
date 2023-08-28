@@ -2,6 +2,7 @@
 import loadable from '@loadable/component'
 import Error from '@/pages/error'
 import Login from '@/pages/login'
+import Login2 from '@/pages/login/login2'
 import { Spin } from 'antd'
 
 // 常用路由 不需要权限的路由
@@ -12,6 +13,13 @@ const constRouter: RouterInfo[] = [
     full: true,
     title: '登录页',
     components: <Login />,
+  },
+  {
+    path: '/login2',
+    key: 'login2',
+    full: true,
+    title: '登录页2',
+    components: <Login2 />,
   },
   {
     path: '/a3',

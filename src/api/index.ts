@@ -3,9 +3,12 @@ import mock from "../mock/index";
 import { stringify } from 'qs'
 
 const request = import.meta.env.VITE_APP_MOCK === "1" ? mock : http;
-const url = 'api/react-ant-admin'
+console.log(import.meta.env.VITE_APP_MOCK)
 
-export const login = (data: any) => request.post(url + "/login", data) as Promise<LoginApi>
+//
+export function getUserInfo(data?: Record<string, any>) { return request.get(`/show${stringify(data)}`,) }
+export function login(data?: Record<string, any>) { return request.post(`login`, data) as Promise<Record<string, any>> }
+export function smsCode(data?: Record<string, any>) { return request.post(`sms_code`, data) as Promise<Record<string, any>> }
 // 菜单
 export const getMenuList = (data: any) => request.get('/menus?' + stringify(data)) as Promise<Record<string, any>>
 export const editMenu = (id: number, data: Record<string, any>) => request.put(`/menus/${id}`, data) as Promise<Record<string, any>>

@@ -27,9 +27,9 @@ function Login() {
     try {
       setLoading(true)
       const res = await login(values)
-      const info = Object.assign({ isLogin: true }, res.data)
-      message.success(res.msg) 
-      saveToken(res.token) // TODO
+      const info =  res.data
+      // message.success(res.msg) 
+      saveToken(res.token)
       stateSetToken(res.token)
       saveUser(info)
       stateSetUser(info)
@@ -42,7 +42,7 @@ function Login() {
 
   return (
     <div className="login-container">
-      <div className="wrapper">
+      <div className="login-wrapper">
         <div className="title">后台</div>
         <div className="welcome">欢迎使用，请先登录</div>
         <Form

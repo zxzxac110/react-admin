@@ -1,15 +1,17 @@
-import axios, { AxiosResponse, AxiosError } from "axios";
-import { message, notification } from "antd";
-import qs from "qs"
-import store from "@/store/index";
-import { getToken, clearLocalDatas, USER_INFO, TOKEN, MENU } from "@/utils";
+import axios, { AxiosError } from "axios";
+import { outLogin } from "@/utils";
 
-import { clearUser } from "@/store/action";
-// 请求地址
-const BASE_URL = import.meta.env.VITE_BASE_URL;
-console.log(import.meta.env)
+// 导入组合
+import { message } from 'antd'
+// import { useStateToken } from '@/store/hooks'
+import { parse, stringify } from 'qs'
+import { getToken } from '@/utils'
 
-// 错误信息
+
+export const http = axios.create({
+  baseURL: import.meta.env.VITE_BASE_URL
+})
+
 const codeMessage: { [key: number]: string } = {
   200: "服务器成功返回请求的数据。",
   201: "新建或修改数据成功。",
@@ -28,84 +30,71 @@ const codeMessage: { [key: number]: string } = {
   504: "网关超时。",
 };
 
-// 请求配置文件
-const config = {
-  // `baseURL` 将自动加在 `url` 前面，除非 `url` 是一个绝对 URL。
-  // 它可以通过设置一个 `baseURL` 便于为 axios 实例的方法传递相对 URL
-  baseURL: BASE_URL,
-
-  timeout: 1000 * 15,
-
-  // `withCredentials` 表示跨域请求时是否需要使用凭证
-  withCredentials: false,
-
-  // `maxRedirects` 定义在 node.js 中 follow 的最大重定向数目
-  // 如果设置为0，将不会 follow 任何重定向
-  maxRedirects: 3,
-  headers: {
-    "Content-Type": " application/json;charset=UTF-8",
-  },
-};
-
-// 创建ajax实例
-const http = axios.create(config);
-http.interceptors.request.use(
-  function (config) {
-    // 在发送请求之前做些什么
-    const token = getToken();
-    if (token) {
-      config.headers["authorization"] = token;
-    }
-    return config;
-  },
-  function (error) {
-    // 对请求错误做些什么
-    return Promise.reject(error);
+function emptyNoSend(data: Record<string, any>): Record<string, any> {
+  // noFilter不为true的参数 将过滤空字段
+  if (data.noFilter) {
+    return data
   }
-);
-
-http.interceptors.response.use(
-  function (response: AxiosResponse) {
-    if (response.data) {
-      const { msg, status } = response.data;
-      if (status === 1) {
-        message.error(msg);
-        return Promise.reject(msg);
-      }
+  const obj: Record<string, any> = {}
+  for (const key in data) {
+    const val = data[key]
+    if (!(val === undefined || val === null || val === '')) {
+      obj[key] = val
     }
-    return response && response.data;
-  },
-  function (error: AxiosError) {
-    const { response } = error;
-    if (response && response.status) {
-      const errorText = codeMessage[response.status] || response.statusText;
-      const { status, config } = response;
-      notification.error({
-        message: `请求错误 ${status}: ${config.url}`,
-        description: errorText,
-      });
-      if (response.status === 401 || response.status === 403) {
-        clearLocalDatas([USER_INFO, TOKEN, MENU]);
-        store.dispatch(clearUser())
-        setTimeout(() => {
-          window.location.reload();
-        }, 1000);
-      }
-    } else if (!response) {
-      notification.error({
-        description: "客户端异常或网络问题，请清除缓存！",
-        message: "状态异常",
-      });
+    if (key === "create_time" && val && val.length) { // 创建时间
+      obj.start_time = val[0]
+      obj.end_time = val[1]
     }
-    // 对响应错误做点什么
-    return Promise.reject(error);
   }
-);
-
-const rewriteGet = http.get
-http.get = function (url: string, data: any, ...any: any[]) {
-  const query: string = qs.stringify(data, { addQueryPrefix: true });
-  return rewriteGet(url + query, ...any)
+  obj.per_page = obj.pageSize
+  delete obj.pageSize
+  return obj
 }
 
-export default http;
+// 请求拦截器
+http.interceptors.request.use(config => {
+  const url = config?.url?.split('?') || []
+  if (url[1]) {
+    config.url = url[0] + '?' + stringify(emptyNoSend(parse(url[1])))
+  }
+  if (config.data && config.data instanceof FormData) {
+    config.headers['Content-Type'] = 'multipart/form-data'
+  } else if (config.data) {
+    config.data = emptyNoSend(config.data)
+  }
+
+  // const token = useStateToken()
+  const token = getToken();// TODO 测试这个是否实时
+
+  if (token) {
+    config.headers = {
+      ...config.headers,
+      Authorization: `Bearer ${token}`,
+    }
+  }
+  return config
+})
+
+// 响应结果拦截器
+http.interceptors.response.use(
+  rep => rep.data,
+  ((err: AxiosError) => {
+
+    const rep: Record<string, any> = (err.response || {}).data || {}
+    const status = (err.response || {}).status
+    if (rep.message) {
+      message.error(rep.message)
+    }
+
+    if (status === 401) {
+      // 清空用户信息
+      outLogin()
+      location.reload()
+    } else if (!rep.message) {
+      message.error(codeMessage[status as number] || '服务器内部错误')
+    }
+    return Promise.reject(err)
+  })
+)
+
+export default http

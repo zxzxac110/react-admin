@@ -132,6 +132,7 @@ async function getMenuList() {
           "path": "/set/dome",
           "icon": "icon_menu",
           "sort": 1475,
+          "keepAlive": true,
           "editable": true
         },
         {
@@ -187,7 +188,7 @@ async function getMenuList() {
       "menu_id": "",
       "path": "/icons",
       "type": 1,
-      "label": "本地图标666",
+      "label": "本地图标",
       "key": "icons",
       "icon": "icon_pen",
       "sort": 9999,
@@ -288,20 +289,49 @@ async function getAdminGroup() {
   return delay(data)
 }
 
+async function login() {
+  const data = {
+    "message": "未注册禁止登陆",
+    "errors": [],
+    "code": 422
+  }
+  return delay({
+    "token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vcXVhbnRhLWFwaS5xaW5iYW93YW4uY24vbG9naW4iLCJpYXQiOjE2OTI5NDI1OTQsImV4cCI6MTc0NDc4MjU5NCwibmJmIjoxNjkyOTQyNTk0LCJqdGkiOiJmZzAxQ2FKU3pvbFZXa1ZJIiwic3ViIjoiMSIsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjcifQ.DJktp-zAUbKeLfzZGYxC-0GREk6HvIHh3QXN6rTcC2c",
+    "token_type": "bearer",
+    "expires_in": 51840000
+  })
+}
+
+
+async function getUserInfo() {
+  const data = {
+    "id": 12,
+    "account": '账号',
+    "type": '',
+    "name": "自行车",
+    "mobile": "188***32",
+  }
+  return delay(data)
+}
+
 function get(url: string) {
   const arr = url.split('?')
 
   console.log('请求数据', arr[0], parse(arr[1] || '{}'))
   if (url.indexOf('/menus') > -1) {
     return getMenuList()
-  }
-  if (url.indexOf('/admin_groups') > -1) {
+  } else if (url.indexOf('/admin_groups') > -1) {
     return getAdminGroup()
+  } else if (url.indexOf('show') > -1) {
+    return getUserInfo()
   }
 }
 
 async function post(url: string, data: any = {}) {
   console.log('请求数据', url, data)
+  if (url.indexOf('login') > -1) {
+    return login()
+  }
   return await delay({})
 }
 

@@ -27,6 +27,7 @@ export function getQuery() {
   return query
 }
 
+// select 格式
 export function selectFormat(obj?: TableMaps): SelectMaps {
   if (!obj) {
     return {}
@@ -54,9 +55,11 @@ export function selectFormat(obj?: TableMaps): SelectMaps {
   return newObj
 }
 
-// function genFormElement() {
-//  />
-// }
+/*退出 */
+export function outLogin() {
+  clearLocalData(
+    [TOKEN, MENU, USER_INFO]);
+}
 
 /**
  * 存储方式
@@ -109,18 +112,13 @@ export function getToken(): Token {
 /**
  * 批量清除本地缓存数据
  */
-export function clearLocalDatas(keys: string[]) {
+export function clearLocalData(keys: string[]) {
   keys.forEach((key) => {
     rmKey(true, key);
     rmKey(false, key);
   });
 }
-/**
- * 退出
- */
-export function layout() {
-  clearLocalDatas([TOKEN, MENU]); // 不移除USER_INFO 因为登录页的账号取得是这里的
-}
+
 
 /**
  * 获取菜单
