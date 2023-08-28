@@ -83,7 +83,12 @@ http.interceptors.response.use(
     const rep: Record<string, any> = (err.response || {}).data || {}
     const status = (err.response || {}).status
     if (rep.message) {
-      message.error(rep.message)
+      message.error(
+        {
+          content: rep.message,
+          className: 'red--text',
+        }
+      )
     }
 
     if (status === 401) {
@@ -91,7 +96,12 @@ http.interceptors.response.use(
       outLogin()
       location.reload()
     } else if (!rep.message) {
-      message.error(codeMessage[status as number] || '服务器内部错误')
+      message.error(
+        {
+          content: codeMessage[status as number] || '服务器内部错误',
+          className: 'red--text',
+        }
+      )
     }
     return Promise.reject(err)
   })

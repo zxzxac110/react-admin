@@ -124,6 +124,7 @@ function Login() {
               <Form.Item name="mobile" rules={IPT_RULE_USERNAME} className="mb-8">
                 <Input
                   className="my-input"
+                  maxLength={11}
                   prefix={<SvgIcon name="user" myClass="gray--text"></SvgIcon>}
                   placeholder="手机号"
                 />
