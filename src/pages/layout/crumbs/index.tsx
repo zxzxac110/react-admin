@@ -15,10 +15,12 @@ function Crumbs() {
       }
     })
   }, [menu, location])
-  return (
+  return breadcrumbItems.length ? (
     <div id="crumbs" className="page-box">
       <Breadcrumb items={breadcrumbItems}></Breadcrumb>
     </div>
+  ) : (
+    <div id="crumbs"></div>
   )
 }
 

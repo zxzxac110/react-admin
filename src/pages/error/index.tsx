@@ -12,23 +12,25 @@ function ErrorPage(props: ErrProps) {
   const {
     status = '404',
     errTitle = '404',
-    subTitle = 'Sorry, the page you visited does not exist.',
+    subTitle = '对不起，您访问的页面不存在。',
   } = props
   const navigate = useNavigate()
   const back = () => {
     return navigate('/', { replace: true })
   }
   return (
-    <Result
-      status={status}
-      title={errTitle}
-      subTitle={subTitle}
-      extra={
-        <Button type="primary" onClick={back}>
-          Go Back
-        </Button>
-      }
-    />
+    <div className="page-box flex1 page-table flex1 mb-4">
+      <Result
+        status={status}
+        title={errTitle}
+        subTitle={subTitle}
+        extra={
+          <Button type="primary" onClick={back}>
+            返回首页
+          </Button>
+        }
+      />
+    </div>
   )
 }
 
