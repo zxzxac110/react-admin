@@ -100,7 +100,7 @@ const auto = [
   },
   {
     key: 'icons',
-    components: () => import('@/pages/a1/icons'),
+    components: () => import('@/pages/icons'),
   },
   {
     key: 'powerType',

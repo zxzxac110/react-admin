@@ -4,8 +4,8 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "npx env-cmd --verbose -e dev vite",
-    "dev_mock": "env-cmd --verbose -e dev_mock vite",
+    "dev": "npx env-cmd --verbose -e dev vite  --port 3010",
+    "dev_mock": "env-cmd --verbose -e dev_mock vite  --port 3010",
     "build": "env-cmd --verbose -e build vite build",
     "build_test": "env-cmd --verbose -e build_dev vite build",
     "build_mock": "env-cmd --verbose -e build_mock vite build",
