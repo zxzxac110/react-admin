@@ -28,6 +28,9 @@ function Header() {
   }
 
   useEffect(() => {
+    if (localStorage.getItem('collapse')) {
+      return
+    }
     stateSetCollapsed(document.body.clientWidth < 1200)
     window.onresize = () => {
       stateSetCollapsed(document.body.clientWidth < 1200)
