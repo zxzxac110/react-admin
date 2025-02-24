@@ -65,8 +65,7 @@ function AppRouter() {
   }
 
   function getLogin() {
-    const com = [<Login2></Login2>, <Login></Login>]
-    return com[Math.floor(Math.random() * com.length)]
+    return <Login2></Login2>
   }
 
   return (

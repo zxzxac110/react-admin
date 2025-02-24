@@ -19,7 +19,7 @@ const getItem = (
     icon,
     children,
     label,
-  } as AntdMenuItem)
+  })
 
 const renderMenu = (item: MenuItem): AntdMenuItem => {
   if (!item.children) {

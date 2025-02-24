@@ -25,8 +25,7 @@ export default defineConfig(({ command, mode }) => {
       port: 5173, // 端口号
       proxy: {
         '/api': {
-          target: "https://z3web.cn",
-          // target: 'http://quanta-api.qinbaowan.cn',
+          target: 'http://api-quickapp.qinbaowan.cn/',
           changeOrigin: true,
           rewrite: (path) => path.replace(/^\/api/, '')
         },
